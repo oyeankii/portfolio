@@ -235,6 +235,8 @@ h2.sec::before{content:"► ";color:var(--hot-pink);}
 .pt5{background:repeating-linear-gradient(90deg,var(--cyber-yellow) 0 10px,#000 10px 20px,var(--hot-pink) 20px 30px,#000 30px 40px);}
 .pt6{background:repeating-linear-gradient(-45deg,var(--crt-green) 0 16px,#000 16px 32px);}
 .pt7{background:repeating-conic-gradient(var(--cyber-yellow) 0 25%, var(--title-2) 0 50%);background-size:26px 26px;}
+.pt8{background:repeating-linear-gradient(0deg,var(--title-2) 0 8px,#fff 8px 10px,var(--crt-green) 10px 18px,#fff 18px 20px);}
+.pt9{background:repeating-conic-gradient(var(--hot-pink) 0 25%, #000 0 50%);background-size:30px 30px;}
 .proj-thumb span{background:#fff;border:2px solid #000;padding:2px 12px;}
 .proj h3{font-family:'Press Start 2P',monospace;font-size:12px;line-height:1.5;}
 .proj p{font-size:20px;line-height:1.25;}
@@ -383,6 +385,17 @@ footer{
   padding:4px 12px;background:var(--win-gray);
 }
 
+/* ============ ARCADE ============ */
+#arcade{display:none;}
+#arcade.open{display:block;}
+#arcadeLaunch{text-align:center;}
+#arcadeLaunch .coin{font-size:24px;margin-bottom:14px;}
+canvas#game{background:#000;border:3px solid;border-color:var(--win-darker) var(--win-light) var(--win-light) var(--win-darker);image-rendering:pixelated;width:100%;max-width:640px;touch-action:none;display:block;margin:0 auto;}
+.hud{display:flex;justify-content:space-between;max-width:640px;margin:0 auto 8px;font-family:'Press Start 2P',monospace;font-size:11px;color:var(--title-1);}
+.gctrl{display:flex;gap:10px;justify-content:center;margin-top:14px;}
+.pad{font-size:28px;width:74px;height:56px;padding:4px;}
+.ghint{text-align:center;margin-top:10px;font-size:19px;}
+@media(min-width:760px){.gctrl{display:none;}}
 @media(max-width:640px){
   body{font-size:20px;}
   .win-body{padding:16px;}
@@ -428,12 +441,12 @@ footer{
         <p class="sub"><span class="wave">👋</span> I believe in the power of creativity to bring visions to life. 5 years of product | ux-ui design. <span class="blink">_</span></p>
         <div class="hero-ctas">
           <a class="btn95 primary" href="#work">&gt;&gt; View My Work</a>
-          <a class="btn95" href="https://drive.google.com/file/d/1cHlNWVuyDeQFEfJDywzNH1CUMHHmRTby/view?usp=sharing" target="_blank" rel="noopener">📄 Download Resume</a>
-          <a class="btn95" href="#guestbook">Sign My Guestbook</a>
+          <button class="btn95" onclick="openArcade()">🕹 Play a Game</button>
+          <a class="btn95" href="https://drive.google.com/file/d/1cHlNWVuyDeQFEfJDywzNH1CUMHHmRTby/view?usp=sharing" target="_blank" rel="noopener">📄 Resume</a>
         </div>
       </div>
       <div class="marquee" aria-hidden="true">
-        <div class="marquee-track">★ ★ ★ Welcome to oyedesigner.in !! ★ This page is best viewed at 800x600 ★ Physics grad turned product designer ★ 5 years · Pine Labs · Athmick · Roojh &amp; more ★ Don't forget to bookmark this page!! ★ ★ ★</div>
+        <div class="marquee-track">★ ★ ★ Welcome to oyedesigner.in !! ★ This page is best viewed at 800x600 ★ Physics grad turned product designer ★ 5 years · Pine Labs · Surgiflow · Indite · Athmick · Roojh &amp; more ★ Try the 🕹 PLAYGROUND ★ Don't forget to bookmark this page!! ★ ★ ★</div>
       </div>
     </div>
   </div>
@@ -457,7 +470,7 @@ footer{
   <!-- WORK WINDOW -->
   <div class="window" id="work">
     <div class="titlebar">
-      <span>📁 MY_WORK — File Manager (7 objects)</span>
+      <span>📁 MY_WORK — File Manager (9 objects)</span>
       <span class="controls"><button class="tbtn" aria-label="minimize">_</button><button class="tbtn" aria-label="maximize">□</button><button class="tbtn" aria-label="close">✕</button></span>
     </div>
     <div class="win-body">
@@ -465,8 +478,22 @@ footer{
       <div class="proj-grid">
 
         <article class="proj"><div class="proj-inner">
+          <div class="proj-thumb pt8"><span>⚕️</span></div>
+          <h3>SURGIFLOW <span class="new-tag">NEW!</span></h3>
+          <p>AI-powered surgical workflow management platform for modern healthcare teams. Designed &amp; developed the complete product experience — clean UX, responsive design, modern SaaS interactions.</p>
+          <div class="meta"><a href="https://surgiflow-web.vercel.app/landing" target="_blank" rel="noopener">&gt;&gt; Visit Live Site</a></div>
+        </div></article>
+
+        <article class="proj"><div class="proj-inner">
+          <div class="proj-thumb pt9"><span>⚡</span></div>
+          <h3>INDITE.IO <span class="new-tag">NEW!</span></h3>
+          <p>An AI agent &amp; workflow automation platform that helps businesses automate lead generation, customer support and internal operations.</p>
+          <div class="meta"><a href="https://indite.io/" target="_blank" rel="noopener">&gt;&gt; Visit Live Site</a></div>
+        </div></article>
+
+        <article class="proj"><div class="proj-inner">
           <div class="proj-thumb pt1"><span>🔮</span></div>
-          <h3>ASTROTALK UX AUDIT <span class="new-tag">NEW!</span></h3>
+          <h3>ASTROTALK UX AUDIT</h3>
           <p>An in-depth UX review of the Astrotalk app.</p>
           <div class="meta"><a href="https://www.behance.net/gallery/180628481/Astrotalk-App-UX-Audit" target="_blank" rel="noopener">&gt;&gt; View Case Study</a></div>
         </div></article>
@@ -629,6 +656,32 @@ footer{
     </div>
   </div>
 
+  <!-- ARCADE LAUNCHER -->
+  <div class="window" id="arcadeLaunch">
+    <div class="titlebar"><span>🕹 BORED? — Insert Coin</span>
+      <span class="controls"><button class="tbtn" aria-label="minimize">_</button><button class="tbtn" aria-label="maximize">□</button><button class="tbtn" aria-label="close">✕</button></span></div>
+    <div class="win-body">
+      <p class="coin">Feeling bored scrolling portfolios all day?? 😴</p>
+      <button class="btn95 primary" onclick="openArcade()">🪙 INSERT COIN — LET'S PLAY!</button>
+    </div>
+  </div>
+
+  <!-- ARCADE GAME -->
+  <div class="window" id="arcade">
+    <div class="titlebar"><span>🚀 SPACE_DEFENDER.EXE — Oyedesigner Arcade</span>
+      <span class="controls"><button class="tbtn" onclick="closeArcade()" aria-label="close game">✕</button></span></div>
+    <div class="win-body">
+      <div class="hud"><span id="score">SCORE 0000</span><span id="hi">HI 0000</span><span id="lives">♥♥♥</span></div>
+      <canvas id="game" width="640" height="480"></canvas>
+      <div class="gctrl">
+        <button class="btn95 pad" id="padL">◀</button>
+        <button class="btn95 pad" id="padF">🔥</button>
+        <button class="btn95 pad" id="padR">▶</button>
+      </div>
+      <p class="ghint">← → move · SPACE shoot · P pause</p>
+    </div>
+  </div>
+
   <!-- UNDER CONSTRUCTION -->
   <div class="construction">
     <span><span class="digger">🚧</span> MORE CASE STUDIES UNDER CONSTRUCTION — CHECK BACK SOON!! <span class="digger">👷</span></span>
@@ -638,7 +691,7 @@ footer{
 
 <!-- TASKBAR FOOTER -->
 <footer>
-  <button class="start-btn" onclick="window.scrollTo({top:0})">🪟 Start</button>
+  <span style="display:flex;gap:10px;"><button class="start-btn" onclick="window.scrollTo({top:0})">🪟 Start</button><button class="start-btn" onclick="openArcade()">🕹 Play</button></span>
   <span>© 2021–2026 Ankit Soni · oyedesigner.in · Best viewed at 800×600</span>
   <span class="taskbar-clock" id="clock">12:00 AM</span>
 </footer>
@@ -709,6 +762,86 @@ document.querySelectorAll('.tbtn').forEach(function(b){
     setTimeout(function(){w.style.transform='';},160);
   });
 });
+
+// ============ SPACE DEFENDER (embedded arcade) ============
+var gameStarted=false;
+function openArcade(){
+  var a=document.getElementById('arcade');a.classList.add('open');
+  document.getElementById('arcadeLaunch').style.display='none';
+  a.scrollIntoView({behavior:'smooth',block:'center'});
+  if(!gameStarted){gameStarted=true;initGame();}
+}
+function closeArcade(){
+  document.getElementById('arcade').classList.remove('open');
+  document.getElementById('arcadeLaunch').style.display='';
+}
+function initGame(){
+var cv=document.getElementById('game'),cx=cv.getContext('2d');
+var W=640,H=480,keys={},state='title',score=0,hi=0,lives=3,wave=1,t=0;
+var ship={x:W/2,y:H-50,cd:0};
+var shots=[],eShots=[],aliens=[],stars=[],parts=[],dir=1,stepT=0;
+for(var i=0;i<70;i++)stars.push({x:Math.random()*W,y:Math.random()*H,s:Math.random()<.3?2:1});
+function spawn(){aliens=[];var rows=3+Math.min(wave,3);
+ for(var r=0;r<rows;r++)for(var c=0;c<8;c++)aliens.push({x:70+c*60,y:60+r*44,a:r%3});dir=1;}
+function reset(){score=0;lives=3;wave=1;ship.x=W/2;shots=[];eShots=[];parts=[];spawn();}
+function boom(x,y,c){for(var i=0;i<12;i++)parts.push({x:x,y:y,vx:(Math.random()-.5)*5,vy:(Math.random()-.5)*5,l:22,c:c});}
+function px(x,y,s,c){cx.fillStyle=c;cx.fillRect(x,y,s,s);}
+function drawShip(x,y){cx.fillStyle='#33FF33';cx.fillRect(x-17,y+8,34,10);cx.fillRect(x-10,y+2,20,8);cx.fillRect(x-3,y-6,6,8);}
+function drawAlien(a){var c=['#FF00AA','#FFFF00','#1084D0'][a.a],f=Math.floor(t/20)%2;
+ cx.fillStyle=c;cx.fillRect(a.x-14,a.y-8,28,16);cx.fillRect(a.x-20,a.y-2+(f?4:0),6,8);cx.fillRect(a.x+14,a.y-2+(f?0:4),6,8);
+ px(a.x-8,a.y-4,5,'#000');px(a.x+3,a.y-4,5,'#000');}
+function hud(){document.getElementById('score').textContent='SCORE '+String(score).padStart(4,'0');
+ document.getElementById('hi').textContent='HI '+String(hi).padStart(4,'0');
+ document.getElementById('lives').textContent='\u2665'.repeat(Math.max(lives,0))||'X';}
+function txt(s,y,sz,c){cx.fillStyle=c;cx.font=sz+'px "Press Start 2P"';cx.textAlign='center';cx.fillText(s,W/2,y);}
+function loop(){
+ requestAnimationFrame(loop);t++;
+ cx.fillStyle='#000';cx.fillRect(0,0,W,H);
+ stars.forEach(function(s){s.y+=s.s*.4;if(s.y>H)s.y=0;px(s.x,s.y,s.s,'#234');});
+ if(state==='title'){txt('SPACE DEFENDER',180,26,'#FFFF00');txt('OYEDESIGNER ARCADE',225,12,'#FF00AA');
+  if(Math.floor(t/30)%2)txt('PRESS FIRE TO START',300,14,'#33FF33');
+  txt('DESIGNED BY ANKIT SONI \u00b7 1997',430,9,'#666');return;}
+ if(state==='over'){txt('GAME OVER',200,28,'#FF00AA');txt('SCORE '+score,260,16,'#FFFF00');
+  if(Math.floor(t/30)%2)txt('PRESS FIRE TO RETRY',320,13,'#33FF33');return;}
+ if(state==='pause'){txt('PAUSED',240,26,'#FFFF00');return;}
+ if(keys.l)ship.x-=5;if(keys.r)ship.x+=5;
+ ship.x=Math.max(20,Math.min(W-20,ship.x));
+ if(ship.cd>0)ship.cd--;
+ if(keys.f&&ship.cd===0){shots.push({x:ship.x,y:ship.y-10});ship.cd=14;}
+ drawShip(ship.x,ship.y);
+ shots=shots.filter(function(s){s.y-=9;px(s.x-2,s.y,4,'#FFFF00');return s.y>-10;});
+ stepT++;var sp=Math.max(28-wave*3-Math.floor((40-aliens.length)/4),6);
+ if(stepT>sp){stepT=0;var edge=false;
+  aliens.forEach(function(a){a.x+=dir*14;if(a.x>W-30||a.x<30)edge=true;});
+  if(edge){dir*=-1;aliens.forEach(function(a){a.y+=16;});}
+  if(aliens.length&&Math.random()<.5){var sh=aliens[Math.floor(Math.random()*aliens.length)];
+   eShots.push({x:sh.x,y:sh.y+10});}}
+ aliens.forEach(drawAlien);
+ eShots=eShots.filter(function(s){s.y+=4+wave*.4;px(s.x-2,s.y,4,'#FF00AA');return s.y<H+10;});
+ shots.forEach(function(s){aliens.forEach(function(a){
+  if(Math.abs(s.x-a.x)<18&&Math.abs(s.y-a.y)<14){a.hit=1;s.y=-99;score+=10;boom(a.x,a.y,'#FFFF00');}});});
+ aliens=aliens.filter(function(a){return !a.hit;});
+ eShots.forEach(function(s){if(Math.abs(s.x-ship.x)<16&&Math.abs(s.y-ship.y)<12){s.y=H+99;lives--;boom(ship.x,ship.y,'#33FF33');
+  if(lives<=0){state='over';hi=Math.max(hi,score);}}});
+ aliens.forEach(function(a){if(a.y>ship.y-20){state='over';hi=Math.max(hi,score);}});
+ parts=parts.filter(function(p){p.x+=p.vx;p.y+=p.vy;p.l--;px(p.x,p.y,3,p.c);return p.l>0;});
+ if(!aliens.length){wave++;score+=50;spawn();}
+ hud();
+}
+function fire(){if(state==='title'||state==='over'){reset();state='play';}keys.f=true;}
+addEventListener('keydown',function(e){
+ if(!document.getElementById('arcade').classList.contains('open'))return;
+ if(e.code==='ArrowLeft')keys.l=true;if(e.code==='ArrowRight')keys.r=true;
+ if(e.code==='Space'){e.preventDefault();fire();}
+ if(e.code==='KeyP'&&(state==='play'||state==='pause'))state=state==='play'?'pause':'play';});
+addEventListener('keyup',function(e){
+ if(e.code==='ArrowLeft')keys.l=false;if(e.code==='ArrowRight')keys.r=false;if(e.code==='Space')keys.f=false;});
+function bind(id,k){var b=document.getElementById(id);
+ ['touchstart','mousedown'].forEach(function(ev){b.addEventListener(ev,function(e){e.preventDefault();k==='f'?fire():keys[k]=true;});});
+ ['touchend','mouseup','mouseleave'].forEach(function(ev){b.addEventListener(ev,function(e){e.preventDefault();keys[k]=false;});});}
+bind('padL','l');bind('padR','r');bind('padF','f');
+hud();loop();
+}
 </script>
 </body>
 </html>

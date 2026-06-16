@@ -249,6 +249,14 @@ a.weblink:visited{color:#551A8B;}
   border:2px solid;border-color:var(--win-light) var(--win-darker) var(--win-darker) var(--win-light);
 }
 .proj .meta a:hover{color:var(--cyber-yellow);}
+.proj .meta-two{display:flex;gap:8px;flex-wrap:wrap;}
+.proj .casebtn{
+  background:var(--hot-pink);color:#fff;padding:6px 12px;font-size:19px;cursor:pointer;
+  border:2px solid;border-color:var(--win-light) var(--win-darker) var(--win-darker) var(--win-light);
+  font-family:'VT323',monospace;
+}
+.proj .casebtn:hover{background:#ff33bb;}
+.proj .casebtn:active{border-color:var(--win-darker) var(--win-light) var(--win-light) var(--win-darker);}
 .proj .meta .nolink{
   display:inline-block;background:var(--win-gray);color:var(--win-darker);
   padding:6px 12px;font-size:19px;
@@ -409,6 +417,62 @@ canvas#game{background:#000;border:3px solid;border-color:var(--win-darker) var(
   .meter .fill{width:var(--w);}
   html{scroll-behavior:auto;}
 }
+
+/* ============ CASE STUDY OVERLAY ============ */
+#caseOverlay{
+  display:none;position:fixed;inset:0;z-index:8000;
+  background:rgba(0,0,40,.55);
+  padding:24px 12px;overflow-y:auto;
+}
+#caseOverlay.open{display:block;}
+.case-win{max-width:960px;margin:0 auto;}
+.cs-eyebrow{
+  display:inline-block;background:var(--title-1);color:#fff;
+  font-family:'Press Start 2P',monospace;font-size:9px;padding:6px 10px;margin-bottom:12px;
+}
+.cs-title{font-family:'Press Start 2P',monospace;font-size:clamp(16px,3vw,24px);color:var(--ink);margin-bottom:6px;}
+.cs-sub{font-size:21px;color:var(--win-darker);margin-bottom:8px;}
+.cs-bar{height:8px;background:linear-gradient(90deg,var(--title-1),var(--title-2),var(--crt-green));border:2px solid #000;margin-bottom:22px;}
+.cs-h2{
+  font-family:'Press Start 2P',monospace;font-size:13px;color:var(--title-1);
+  margin:26px 0 12px;padding-bottom:6px;border-bottom:3px dotted var(--win-dark);
+}
+.cs-h2::before{content:"\25BA ";color:var(--hot-pink);}
+.cs-panel{
+  background:#fff;border:2px solid;border-color:var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+  padding:14px 16px;font-size:20px;line-height:1.35;
+}
+.cs-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;}
+.cs-card{
+  background:#fff;border:2px solid;border-color:var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+  padding:12px 14px;
+}
+.cs-card b{display:block;font-family:'Press Start 2P',monospace;font-size:11px;line-height:1.5;color:var(--title-1);margin-bottom:8px;}
+.cs-card span{font-size:19px;line-height:1.3;}
+.cs-card .tagline{display:inline-block;background:var(--cyber-yellow);font-size:16px;padding:1px 5px;margin-top:8px;}
+.cs-persona b{color:var(--hot-pink);}
+.cs-chips{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 8px;}
+.cs-chip{font-size:18px;background:var(--title-1);color:#fff;padding:4px 10px;}
+.cs-q{
+  background:#fff;border:2px solid;border-color:var(--win-dark) var(--win-light) var(--win-light) var(--win-dark);
+  padding:12px 14px;margin-bottom:10px;
+}
+.cs-q .qn{font-family:'Press Start 2P',monospace;font-size:11px;color:var(--title-1);display:block;margin-bottom:7px;line-height:1.5;}
+.cs-q p{font-size:19px;line-height:1.3;}
+.cs-legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px;font-size:18px;}
+.cs-legend span{display:flex;align-items:center;gap:6px;}
+.dot{width:16px;height:16px;border:2px solid #000;display:inline-block;}
+.d-adv{background:#7ed9a6;} .d-mix{background:#f0b347;} .d-gap{background:#f08573;}
+.cs-table-wrap{overflow-x:auto;border:2px solid #000;}
+table.cs-table{border-collapse:collapse;width:100%;min-width:680px;font-size:17px;}
+table.cs-table th{
+  background:var(--win-gray);border:1px solid var(--win-dark);padding:8px 10px;text-align:left;
+  font-family:'Press Start 2P',monospace;font-size:10px;
+}
+table.cs-table td{border:1px solid #999;padding:9px 11px;line-height:1.3;vertical-align:top;}
+table.cs-table td.feat{background:#fff;font-weight:bold;width:24%;}
+td.adv{background:#7ed9a6;} td.mix{background:#f0b347;} td.gap{background:#f08573;}
+.cs-close-row{text-align:center;margin-top:24px;}
 </style>
 </head>
 <body class="crt">
@@ -488,7 +552,7 @@ canvas#game{background:#000;border:3px solid;border-color:var(--win-darker) var(
           <div class="proj-thumb pt9"><span>⚡</span></div>
           <h3>INDITE.IO <span class="new-tag">NEW!</span></h3>
           <p>An AI agent &amp; workflow automation platform that helps businesses automate lead generation, customer support and internal operations.</p>
-          <div class="meta"><a href="https://indite.io/" target="_blank" rel="noopener">&gt;&gt; Visit Live Site</a></div>
+          <div class="meta meta-two"><a href="https://indite.io/" target="_blank" rel="noopener">&gt;&gt; Live Site</a><button class="casebtn" onclick="openCase()">📊 UX Research</button></div>
         </div></article>
 
         <article class="proj"><div class="proj-inner">
@@ -687,6 +751,86 @@ canvas#game{background:#000;border:3px solid;border-color:var(--win-darker) var(
     <span><span class="digger">🚧</span> MORE CASE STUDIES UNDER CONSTRUCTION — CHECK BACK SOON!! <span class="digger">👷</span></span>
   </div>
 
+
+<!-- ===== CASE STUDY OVERLAY (single-page modal "page") ===== -->
+<div id="caseOverlay" role="dialog" aria-modal="true" aria-label="Indite UX Research">
+  <div class="window case-win">
+    <div class="titlebar">
+      <span>📊 INDITE_UX_RESEARCH.PDF — Document Viewer</span>
+      <span class="controls"><button class="tbtn" onclick="closeCase()" aria-label="close">✕</button></span>
+    </div>
+    <div class="menubar"><span><u>F</u>ile</span><span><u>V</u>iew</span><span><u>Z</u>oom</span><span onclick="closeCase()" style="margin-left:auto;">✕ Close</span></div>
+    <div class="win-body">
+      <div class="case-scroll">
+        <span class="cs-eyebrow">UX REDESIGN BRIEF</span>
+        <div class="cs-title">Indite.io</div>
+        <div class="cs-sub">AI automation &amp; chatbot platform · Full product redesign</div>
+        <div class="cs-bar"></div>
+
+        <div class="cs-h2">PROBLEM STATEMENT</div>
+        <div class="cs-panel">Indite.io offers powerful AI automation, chatbot creation, and agent marketplace capabilities — but its current interface overwhelms users with dense information, a cluttered UI, and no clear onboarding path. Non-technical business users and operators struggle to understand where to start, how to build, and how to navigate the platform — leading to high cognitive load, low feature adoption, and user drop-off before they experience core value.</div>
+
+        <div class="cs-h2">GOALS</div>
+        <div class="cs-cards">
+          <div class="cs-card"><b>Reduce Cognitive Load</b><span>Simplify the interface by removing visual clutter and restructuring information hierarchy so users can focus on one task at a time.</span></div>
+          <div class="cs-card"><b>Clear Navigation Paths</b><span>Guide users from entry to value with structured onboarding and contextual wayfinding — removing dead ends and ambiguous flows.</span></div>
+          <div class="cs-card"><b>Establish a Design System</b><span>Build a scalable component library with tokens, variables, and patterns that create visual and functional consistency.</span></div>
+          <div class="cs-card"><b>Simplify Workflows</b><span>Abstract n8n-level complexity into digestible, guided steps — making automation accessible without removing power.</span></div>
+        </div>
+
+        <div class="cs-h2">SOLUTION</div>
+        <div class="cs-cards">
+          <div class="cs-card"><b>Progressive Disclosure</b><span>Show only what's relevant at each step. Hide advanced settings behind expandable panels. Surface complexity only when users are ready.</span></div>
+          <div class="cs-card"><b>Guided Onboarding Flow</b><span>A step-by-step experience that helps users set up their first chatbot or automation in under 5 minutes, with templates as starting points.</span></div>
+          <div class="cs-card"><b>Restructured IA</b><span>Reorganise the platform into clear sections: Build, Deploy, Monitor, and Marketplace — with consistent navigation and logical groupings.</span></div>
+          <div class="cs-card"><b>Design System From Scratch</b><span>Define tokens, components, and patterns using Figma variables — scalable, consistent design that speeds up future dev handoff.</span></div>
+        </div>
+
+        <div class="cs-h2">USER PERSONAS (HYPOTHESISED)</div>
+        <div class="cs-cards">
+          <div class="cs-card cs-persona"><b>Business Owner / Operator</b><div class="cs-chips"><span class="cs-chip">Non-technical</span><span class="cs-chip">SMB</span></div><span>Wants to automate support or sales but feels lost in the interface. Doesn't know where to start or what's possible.</span><span class="tagline">Goals: quick wins, templates, guided setup</span></div>
+          <div class="cs-card cs-persona"><b>Marketing / Ops Manager</b><div class="cs-chips"><span class="cs-chip">Semi-technical</span><span class="cs-chip">Mid-market</span></div><span>Needs to set up lead gen or support bots. Frustrated by unclear feature naming and an overwhelming dashboard.</span><span class="tagline">Goals: fast deployment, clear metrics, integrations</span></div>
+          <div class="cs-card cs-persona"><b>Developer / Technical User</b><div class="cs-chips"><span class="cs-chip">Technical</span><span class="cs-chip">Agency / Startup</span></div><span>Wants to build complex workflows but finds the visual logic editor inconsistent and hard to debug.</span><span class="tagline">Goals: power, control, API access, custom logic</span></div>
+        </div>
+
+        <div class="cs-h2">RESEARCH METHODS TO VALIDATE</div>
+        <div class="cs-chips"><span class="cs-chip">Usability testing on current product</span><span class="cs-chip">Competitive analysis</span></div>
+
+        <div class="cs-h2">KEY RESEARCH QUESTIONS</div>
+        <div class="cs-q"><span class="qn">1. Where do new users get stuck first?</span><p>Users land on a dense dashboard with no clear call to action. They see chatbot, automation, and agent marketplace all at once, with no hierarchy telling them where to start. The first question becomes "what do I do first?" — and most won't find the answer.</p></div>
+        <div class="cs-q"><span class="qn">2. Which features do users prioritise?</span><p>Most non-technical users come to Indite with a specific, tangible goal: "I want a chatbot for my website." It's the most concrete and familiar use case.</p></div>
+        <div class="cs-q"><span class="qn">3. What mental model do users arrive with?</span><p>They expect a customer support tool — a chat widget they can embed and configure simply. They get confused when they see automation builders and agent marketplaces.</p></div>
+        <div class="cs-q"><span class="qn">4. How do users describe the platform?</span><p>"It's a platform where you build AI chatbots for your business, automate repetitive tasks, and hire pre-built AI agents — without needing to code."</p></div>
+        <div class="cs-q"><span class="qn">5. What does success look like in session one?</span><p>Varies from user to user — which is exactly why guided, persona-aware onboarding matters.</p></div>
+
+        <div class="cs-h2">COMPETITIVE ANALYSIS — INDITE.IO vs n8n</div>
+        <div class="cs-legend">
+          <span><i class="dot d-adv"></i> Strong Advantage</span>
+          <span><i class="dot d-mix"></i> Partial / Mixed</span>
+          <span><i class="dot d-gap"></i> Gap / Weakness</span>
+        </div>
+        <div class="cs-table-wrap">
+          <table class="cs-table">
+            <tr><th>Feature Area</th><th>Indite.io</th><th>n8n</th></tr>
+            <tr><td class="feat">Chatbot Builder</td><td class="adv">Native, no-code chatbot builder with multilingual support and brand customisation</td><td class="mix">Basic chatbot via webhook + Conversational Agent node — not dedicated, manual setup</td></tr>
+            <tr><td class="feat">Workflow Automation</td><td class="mix">Automation present but UI is cluttered and complex — high cognitive load for new users</td><td class="adv">Best-in-class node-based canvas. 400+ integrations, real-time feedback, JS/Python nodes</td></tr>
+            <tr><td class="feat">AI Agent Capabilities</td><td class="adv">Agent marketplace — rent or buy pre-built agents. Covers 50+ industry verticals</td><td class="mix">Build agents manually via LangChain nodes. No marketplace — full DIY, needs skill</td></tr>
+            <tr><td class="feat">Integrations</td><td class="adv">150+ integrations + HTTP mode for any API. Sheets, Slack, HubSpot, Salesforce etc.</td><td class="adv">400+ pre-built integrations + HTTP mode for any API. Same major apps</td></tr>
+            <tr><td class="feat">Onboarding &amp; Setup</td><td class="gap">No guided onboarding — users land in a cluttered dashboard with no clear start</td><td class="mix">Templates help but setup needs technical knowledge. Blank canvas overwhelms beginners</td></tr>
+            <tr><td class="feat">Templates &amp; Presets</td><td class="mix">Industry use cases suggested but no clear template library in the builder</td><td class="adv">900+ ready-to-use workflow templates across categories — strong starting library</td></tr>
+            <tr><td class="feat">Analytics &amp; Monitoring</td><td class="adv">Real-time dashboards for agent performance, customer interactions, key metrics</td><td class="adv">Execution logs, audit trails, workflow history, real-time alerts, SIEM streaming</td></tr>
+            <tr><td class="feat">Target User</td><td class="adv">Business owners, ops teams, support managers — non-technical users</td><td class="mix">Developers, DevOps, IT teams — non-technical users struggle significantly</td></tr>
+            <tr><td class="feat">Deployment</td><td class="mix">Cloud-only — no self-hosting option mentioned</td><td class="adv">Cloud + full self-hosting (Docker/npm). On-prem, RBAC, SSO SAML, LDAP</td></tr>
+            <tr><td class="feat">AI Memory &amp; Context</td><td class="adv">Agents remember context and improve over time using feedback loops</td><td class="gap">No built-in persistent memory — context resets each run. Needs external DB</td></tr>
+          </table>
+        </div>
+
+        <div class="cs-close-row"><button class="btn95 primary" onclick="closeCase()">✕ Close &amp; Back to Portfolio</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </main>
 
 <!-- TASKBAR FOOTER -->
@@ -842,6 +986,12 @@ function bind(id,k){var b=document.getElementById(id);
 bind('padL','l');bind('padR','r');bind('padF','f');
 hud();loop();
 }
+
+// Case study overlay
+function openCase(){var o=document.getElementById('caseOverlay');o.classList.add('open');o.scrollTop=0;document.body.style.overflow='hidden';}
+function closeCase(){document.getElementById('caseOverlay').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeCase();});
+document.getElementById('caseOverlay').addEventListener('click',function(e){if(e.target===this)closeCase();});
 </script>
 </body>
 </html>

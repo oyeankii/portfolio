@@ -808,6 +808,279 @@ section{padding:clamp(100px,12vw,160px) 0;position:relative;border-bottom:1px so
   }
 }
 
+/* ============ ACT III: THE DAILIES — PHOTO/VIDEO REEL ============ */
+.reel-strip-wrapper{
+  position:relative;
+  margin-top:36px;
+  padding:22px 0;
+  border-top:1.5px solid var(--ink);
+  border-bottom:1.5px solid var(--ink);
+  background:var(--paper-2);
+  box-shadow:4px 4px 0px var(--ink);
+}
+.reel-strip-wrapper::before, .reel-strip-wrapper::after{
+  content:'';
+  position:absolute;
+  left:0; right:0;
+  height:8px;
+  background-image:radial-gradient(circle, var(--ink) 2.5px, transparent 2.5px);
+  background-size:20px 20px;
+  background-repeat:repeat-x;
+  pointer-events:none;
+}
+.reel-strip-wrapper::before{ top:6px; }
+.reel-strip-wrapper::after{ bottom:6px; }
+
+.reel-track{
+  display:flex;
+  gap:18px;
+  padding:6px 28px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  cursor:grab;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.reel-track::-webkit-scrollbar{ display:none; }
+.reel-track.dragging{ cursor:grabbing; scroll-snap-type:none; }
+
+.reel-frame{
+  position:relative;
+  flex:0 0 auto;
+  width:260px;
+  height:190px;
+  scroll-snap-align:start;
+  border:1px solid var(--ink);
+  border-radius:var(--r);
+  overflow:hidden;
+  background:var(--paper);
+  cursor:pointer;
+  transition:transform .25s, box-shadow .25s;
+}
+.reel-frame:hover{
+  transform:translateY(-3px);
+  box-shadow:3px 5px 0px var(--ink);
+}
+.reel-frame::before{
+  content: attr(data-frame);
+  position:absolute;
+  left:8px; top:8px;
+  font-family:'Space Mono',monospace;
+  font-size:9px;
+  font-weight:700;
+  color:var(--crimson);
+  background:rgba(250,245,235,0.85);
+  padding:2px 5px;
+  border-radius:2px;
+  z-index:3;
+  letter-spacing:.04em;
+}
+.reel-placeholder-art{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:
+    repeating-linear-gradient(135deg, rgba(28,22,18,0.05) 0px, rgba(28,22,18,0.05) 2px, transparent 2px, transparent 14px),
+    var(--paper-2);
+}
+.reel-placeholder-art svg{
+  width:30px;
+  height:30px;
+  opacity:.55;
+}
+.reel-placeholder-art .ph-label{
+  font-family:'Space Mono',monospace;
+  font-size:9.5px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+  opacity:.75;
+}
+.reel-play-badge{
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:44px; height:44px;
+  border-radius:50%;
+  background:var(--crimson);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:2;
+  box-shadow:0 4px 14px rgba(28,22,18,0.35);
+}
+.reel-play-badge::after{
+  content:'';
+  width:0; height:0;
+  border-style:solid;
+  border-width:7px 0 7px 11px;
+  border-color:transparent transparent transparent var(--paper);
+  margin-left:2px;
+}
+.reel-caption-bar{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  padding:10px 12px;
+  background:linear-gradient(180deg, transparent, rgba(28,22,18,0.82) 55%);
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  z-index:3;
+}
+.reel-caption-bar .reel-cap{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:12px;
+  font-weight:600;
+  color:#fff;
+  line-height:1.3;
+}
+.reel-caption-bar .reel-tag{
+  font-family:'Space Mono',monospace;
+  font-size:9px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:700;
+}
+.reel-controls{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:14px;
+}
+.reel-arrow{
+  width:38px; height:38px;
+  border-radius:50%;
+  border:1.5px solid var(--ink);
+  background:var(--paper);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:.2s;
+  color:var(--ink);
+}
+.reel-arrow:hover{
+  background:var(--crimson);
+  border-color:var(--crimson);
+  color:#fff;
+}
+.reel-arrow svg{ width:16px; height:16px; }
+
+/* Lightbox */
+#reel-lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(28,22,18,0.92);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+  z-index:200;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .3s;
+}
+#reel-lightbox.visible{
+  opacity:1;
+  visibility:visible;
+}
+.reel-lightbox-inner{
+  width:min(880px, 92vw);
+  background:var(--paper);
+  border:1.5px solid var(--ink);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  transform:scale(0.94);
+  transition:transform .3s;
+  box-shadow:8px 10px 0px rgba(0,0,0,0.3);
+}
+#reel-lightbox.visible .reel-lightbox-inner{
+  transform:scale(1);
+}
+.reel-lightbox-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 18px;
+  border-bottom:1px solid var(--line);
+}
+.reel-lightbox-top .t{
+  font-family:'Space Mono',monospace;
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--crimson);
+  font-weight:700;
+}
+.reel-x{
+  width:30px; height:30px;
+  border-radius:50%;
+  border:1.5px solid var(--ink);
+  background:transparent;
+  cursor:pointer;
+  font-size:14px;
+  line-height:1;
+  transition:.2s;
+}
+.reel-x:hover{
+  background:var(--crimson);
+  color:#fff;
+  border-color:var(--crimson);
+}
+.reel-lightbox-stage{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  background:
+    repeating-linear-gradient(135deg, rgba(28,22,18,0.05) 0px, rgba(28,22,18,0.05) 2px, transparent 2px, transparent 14px),
+    var(--paper-2);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+.reel-lightbox-stage svg{
+  width:54px; height:54px;
+  opacity:.5;
+}
+.reel-lightbox-stage .ph-label{
+  font-family:'Space Mono',monospace;
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.reel-lightbox-meta{
+  padding:16px 18px 20px;
+}
+.reel-lightbox-meta .reel-cap{
+  font-family:'Instrument Serif',serif;
+  font-size:20px;
+  color:var(--ink);
+  margin-bottom:4px;
+}
+.reel-lightbox-meta .reel-tag{
+  font-family:'Space Mono',monospace;
+  font-size:10px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--crimson);
+  font-weight:700;
+}
+
+@media(max-width:600px){
+  .reel-frame{ width:210px; height:160px; }
+  .reel-track{ padding:6px 16px; gap:14px; }
+  .reel-controls{ display:none; }
+}
+
 /* EQUATION STRIP */
 .equation-strip{border-bottom:1px solid var(--line);background:var(--paper-2);position:relative;}
 .equation-strip .wrap{padding-top:40px;padding-bottom:40px;text-align:center;}
@@ -2362,6 +2635,216 @@ td.adv{background:rgba(46, 125, 91, 0.18);color:#A7F3D0;font-weight:500;}td.mix{
     </div>
   </div>
 </section>
+
+<!-- ============ ACT III: THE DAILIES — PHOTO/VIDEO REEL ============ -->
+<!--
+  HOW TO SWAP IN REAL MEDIA LATER:
+  Each .reel-frame below currently renders a placeholder (.reel-placeholder-art).
+  To use a real photo: delete the .reel-placeholder-art div inside that frame and
+  add  <img src="your-photo.jpg" alt="...">  in its place (it will fill the frame
+  automatically — add `style="width:100%;height:100%;object-fit:cover;"`).
+  To use a real video: same idea, but add a muted/looping <video> tag, or keep the
+  play badge and have the click handler in the script below open a real video URL
+  instead of the placeholder lightbox stage.
+-->
+<section id="reel">
+  <div class="wrap">
+    <div class="shead reveal">
+      <span class="eyebrow">Act III: The Dailies</span>
+      <h2>Life, between <span class="em">takes</span>.</h2>
+      <p>Unscripted frames from talks, studio sessions, and the cutting-room floor — the cinema-roll version of a portfolio.</p>
+    </div>
+
+    <div class="reel-strip-wrapper reveal">
+      <div class="reel-track" id="reelTrack">
+
+        <div class="reel-frame" data-frame="01" data-type="photo" data-cap="On stage, mid-sentence." data-tag="Talks">
+          <div class="reel-placeholder-art">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.5"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg>
+            <span class="ph-label">Photo placeholder</span>
+          </div>
+          <div class="reel-caption-bar">
+            <span class="reel-cap">On stage, mid-sentence.</span>
+            <span class="reel-tag">Talks</span>
+          </div>
+        </div>
+
+        <div class="reel-frame" data-frame="02" data-type="video" data-cap="60-second walkthrough of a live prototype." data-tag="Process">
+          <div class="reel-placeholder-art">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.5"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg>
+            <span class="ph-label">Video placeholder</span>
+          </div>
+          <div class="reel-play-badge"></div>
+          <div class="reel-caption-bar">
+            <span class="reel-cap">60-second walkthrough of a live prototype.</span>
+            <span class="reel-tag">Process</span>
+          </div>
+        </div>
+
+        <div class="reel-frame" data-frame="03" data-type="photo" data-cap="Whiteboard chaos before clarity." data-tag="Studio">
+          <div class="reel-placeholder-art">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.5"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg>
+            <span class="ph-label">Photo placeholder</span>
+          </div>
+          <div class="reel-caption-bar">
+            <span class="reel-cap">Whiteboard chaos before clarity.</span>
+            <span class="reel-tag">Studio</span>
+          </div>
+        </div>
+
+        <div class="reel-frame" data-frame="04" data-type="video" data-cap="Behind the scenes of a design sprint." data-tag="Sprint">
+          <div class="reel-placeholder-art">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.5"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg>
+            <span class="ph-label">Video placeholder</span>
+          </div>
+          <div class="reel-play-badge"></div>
+          <div class="reel-caption-bar">
+            <span class="reel-cap">Behind the scenes of a design sprint.</span>
+            <span class="reel-tag">Sprint</span>
+          </div>
+        </div>
+
+        <div class="reel-frame" data-frame="05" data-type="photo" data-cap="Coffee, sketchbook, repeat." data-tag="Ritual">
+          <div class="reel-placeholder-art">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.5"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg>
+            <span class="ph-label">Photo placeholder</span>
+          </div>
+          <div class="reel-caption-bar">
+            <span class="reel-cap">Coffee, sketchbook, repeat.</span>
+            <span class="reel-tag">Ritual</span>
+          </div>
+        </div>
+
+        <div class="reel-frame" data-frame="06" data-type="video" data-cap="A quick walkthrough of a shipped flow." data-tag="Demo">
+          <div class="reel-placeholder-art">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.5"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg>
+            <span class="ph-label">Video placeholder</span>
+          </div>
+          <div class="reel-play-badge"></div>
+          <div class="reel-caption-bar">
+            <span class="reel-cap">A quick walkthrough of a shipped flow.</span>
+            <span class="reel-tag">Demo</span>
+          </div>
+        </div>
+
+        <div class="reel-frame" data-frame="07" data-type="photo" data-cap="Team huddle before a big pitch." data-tag="Team">
+          <div class="reel-placeholder-art">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.5"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg>
+            <span class="ph-label">Photo placeholder</span>
+          </div>
+          <div class="reel-caption-bar">
+            <span class="reel-cap">Team huddle before a big pitch.</span>
+            <span class="reel-tag">Team</span>
+          </div>
+        </div>
+
+        <div class="reel-frame" data-frame="08" data-type="photo" data-cap="Physics notes, once upon a time." data-tag="Origins">
+          <div class="reel-placeholder-art">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.5"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg>
+            <span class="ph-label">Photo placeholder</span>
+          </div>
+          <div class="reel-caption-bar">
+            <span class="reel-cap">Physics notes, once upon a time.</span>
+            <span class="reel-tag">Origins</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="reel-controls">
+      <button class="reel-arrow" id="reelPrev" aria-label="Scroll left">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="reel-arrow" id="reelNext" aria-label="Scroll right">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div id="reel-lightbox" role="dialog" aria-modal="true" aria-label="Media preview">
+  <div class="reel-lightbox-inner">
+    <div class="reel-lightbox-top">
+      <span class="t" id="reelLbType">Photo</span>
+      <button class="reel-x" id="reelLbClose" aria-label="Close">✕</button>
+    </div>
+    <div class="reel-lightbox-stage">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.5"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg>
+      <span class="ph-label" id="reelLbLabel">Placeholder — swap with real media</span>
+    </div>
+    <div class="reel-lightbox-meta">
+      <div class="reel-cap" id="reelLbCap">Caption</div>
+      <span class="reel-tag" id="reelLbTag">Tag</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const track = document.getElementById('reelTrack');
+  const prevBtn = document.getElementById('reelPrev');
+  const nextBtn = document.getElementById('reelNext');
+  if(!track) return;
+
+  // Arrow nav
+  function scrollByFrame(dir){
+    const frame = track.querySelector('.reel-frame');
+    const step = frame ? frame.getBoundingClientRect().width + 18 : 280;
+    track.scrollBy({ left: dir * step, behavior: 'smooth' });
+  }
+  prevBtn && prevBtn.addEventListener('click', () => scrollByFrame(-1));
+  nextBtn && nextBtn.addEventListener('click', () => scrollByFrame(1));
+
+  // Drag-to-scroll (mouse)
+  let isDown = false, startX = 0, startScroll = 0;
+  track.addEventListener('mousedown', (e) => {
+    isDown = true;
+    track.classList.add('dragging');
+    startX = e.pageX;
+    startScroll = track.scrollLeft;
+  });
+  window.addEventListener('mouseup', () => {
+    isDown = false;
+    track.classList.remove('dragging');
+  });
+  window.addEventListener('mousemove', (e) => {
+    if(!isDown) return;
+    e.preventDefault();
+    track.scrollLeft = startScroll - (e.pageX - startX);
+  });
+
+  // Lightbox
+  const lb = document.getElementById('reel-lightbox');
+  const lbType = document.getElementById('reelLbType');
+  const lbLabel = document.getElementById('reelLbLabel');
+  const lbCap = document.getElementById('reelLbCap');
+  const lbTag = document.getElementById('reelLbTag');
+  const lbClose = document.getElementById('reelLbClose');
+
+  function openLightbox(frameEl){
+    const type = frameEl.dataset.type === 'video' ? 'Video' : 'Photo';
+    lbType.textContent = type;
+    lbLabel.textContent = (type === 'Video' ? 'Video placeholder' : 'Photo placeholder') + ' — swap with real media';
+    lbCap.textContent = frameEl.dataset.cap || '';
+    lbTag.textContent = frameEl.dataset.tag || '';
+    lb.classList.add('visible');
+  }
+  function closeLightbox(){
+    lb.classList.remove('visible');
+  }
+  track.querySelectorAll('.reel-frame').forEach(frameEl => {
+    frameEl.addEventListener('click', (e) => {
+      // Avoid triggering a click right after a drag gesture
+      if (Math.abs((e.pageX||0) - startX) > 6 && isDown) return;
+      openLightbox(frameEl);
+    });
+  });
+  lbClose && lbClose.addEventListener('click', closeLightbox);
+  lb && lb.addEventListener('click', (e) => { if(e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
+})();
+</script>
 
 <section id="contact">
   <div class="wrap">

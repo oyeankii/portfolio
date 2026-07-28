@@ -152,7 +152,15 @@ img{display:block;max-width:100%}
 .h2{font-family:var(--display);font-weight:600;letter-spacing:-.035em;line-height:1.04;font-size:clamp(1.875rem,4.2vw,3.15rem)}
 
 /* ─── annotated equation ──────────────────────────────────── */
-.figure{border:1px solid var(--rule);border-radius:3px;padding:clamp(22px,4vw,40px) clamp(16px,4vw,40px) clamp(18px,3vw,28px);margin-top:clamp(22px,3vw,34px)}
+.figure{
+  border:1px solid var(--rule);border-radius:3px;margin-top:clamp(22px,3vw,34px);
+  padding:clamp(24px,4vw,42px) clamp(18px,4vw,42px);
+  display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(20px,3vw,34px);align-items:center;
+}
+@media (min-width:820px){
+  .figure{grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:clamp(30px,4vw,52px)}
+  .eq{gap:clamp(10px,2vw,26px)}
+}
 .eq{display:flex;align-items:flex-start;justify-content:center;gap:clamp(10px,3.5vw,38px);flex-wrap:nowrap}
 .eq-op{font-family:var(--display);font-weight:400;color:var(--ink-45);font-size:clamp(1.6rem,4.4vw,2.8rem);line-height:1;padding-top:.12em}
 .term{display:flex;flex-direction:column;align-items:center;min-width:0}
@@ -161,9 +169,20 @@ img{display:block;max-width:100%}
 .leader{width:1px;height:clamp(18px,4vw,34px);background:var(--rule);margin-top:.35em;position:relative}
 .leader::after{content:"";position:absolute;left:50%;bottom:-2px;translate:-50% 0;width:5px;height:5px;border-radius:50%;background:var(--ink)}
 .term-l{font-family:var(--mono);font-size:clamp(.5625rem,1.5vw,.6875rem);font-weight:500;letter-spacing:.13em;text-transform:uppercase;margin-top:10px;text-align:center}
-.figcap{margin-top:clamp(20px,3vw,28px);padding-top:18px;border-top:1px dashed var(--rule);color:var(--ink-70);max-width:62ch}
-.about-copy{margin-top:20px;color:var(--ink-70);max-width:60ch}
-.about-copy + .about-copy{margin-top:1em}
+.figcap{margin-top:0;padding-top:18px;border-top:1px dashed var(--rule);color:var(--ink-70)}
+@media (min-width:820px){
+  .figcap{padding-top:0;border-top:0;padding-left:clamp(28px,4vw,52px);border-left:1px solid var(--rule);max-width:44ch}
+}
+.about-copy{color:var(--ink-70);margin:0 0 1.05em}
+.about-copy:last-child{margin-bottom:0}
+.about-cols{margin-top:clamp(24px,3.5vw,36px)}
+@media (min-width:900px){
+  /* English is short: two paragraphs, one per column, no mid-sentence splits */
+  html:not(.hi) .about-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(32px,4vw,56px);align-items:start}
+  html:not(.hi) .about-cols .about-copy{margin-bottom:0}
+  /* Hindi runs long: let it flow and balance across both columns */
+  html.hi .about-cols{columns:2;column-gap:clamp(32px,4vw,56px);orphans:2;widows:2}
+}
 
 /* ─── work rows ───────────────────────────────────────────── */
 .rows{margin-top:clamp(18px,2.5vw,26px);border-top:1px solid var(--rule)}
@@ -225,6 +244,55 @@ a.row:hover .row-cta svg{translate:5px 0}
 .foot-end a:hover{color:var(--ink)}
 .foot-end nav{display:flex;gap:20px}
 
+/* ─── language switch ────────────────────────────────────────── */
+html:not(.hi) [data-l="hi"]{display:none !important}
+html.hi [data-l="en"]{display:none !important}
+
+/* Devanagari needs no tracking, no caps, and more leading than Latin */
+[lang="hi"]{
+  font-family:"Anek Devanagari","Noto Sans Devanagari",var(--body);
+  letter-spacing:normal;text-transform:none;line-height:1.85;
+  font-feature-settings:normal;
+}
+.name [lang="hi"],.role [lang="hi"],.h2 [lang="hi"],.foot-h [lang="hi"],.stack h3 [lang="hi"]{
+  font-family:"Tiro Devanagari Hindi","Anek Devanagari",serif;
+  font-weight:400;letter-spacing:0;
+}
+.name [lang="hi"]{font-size:.56em;line-height:1.34;display:inline-block;max-width:20ch}
+.role [lang="hi"]{line-height:1.5}
+.h2 [lang="hi"]{font-size:.9em;line-height:1.38;display:inline-block}
+.foot-h [lang="hi"]{font-size:.72em;line-height:1.3;display:inline-block}
+.tag [lang="hi"],.cell .tag[lang="hi"],.row-cta [lang="hi"]{
+  font-family:"Anek Devanagari",var(--body);font-size:.9375rem;
+  letter-spacing:normal;text-transform:none;line-height:1.5;
+}
+.gutter [lang="hi"]{font-size:.875rem}
+.btn [lang="hi"]{font-family:"Anek Devanagari",var(--body);font-size:.875rem;letter-spacing:normal;text-transform:none}
+.nav-links a [lang="hi"]{font-family:"Anek Devanagari",var(--body);font-size:.8125rem;letter-spacing:normal;text-transform:none}
+html.hi .lede{max-width:44ch}
+html.hi .figcap{max-width:40ch}
+
+/* toggle control */
+.lang{display:inline-flex;align-items:center;border:1px solid var(--rule);border-radius:999px;overflow:hidden;flex:0 0 auto}
+.lang .globe{
+  width:13px;height:13px;flex:0 0 auto;margin:0 -2px 0 9px;color:var(--ink-45);
+  transition:color .22s;
+}
+.lang:hover .globe{color:var(--ink)}
+.lang button{
+  appearance:none;background:transparent;border:0;cursor:pointer;color:var(--ink-45);
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.5em .72em;line-height:1;transition:background-color .22s,color .22s;
+}
+.lang button + button{border-left:1px solid var(--rule);font-family:"Anek Devanagari",var(--mono);letter-spacing:normal;font-size:.75rem}
+.lang button[aria-pressed="true"]{background:var(--ink);color:#fff}
+@media (max-width:520px){
+  .nav-in{gap:8px}
+  .nav-links{gap:11px}
+  .nav-links a{font-size:.625rem}
+  .mark span{display:none}
+}
+
 /* ─── reveal ──────────────────────────────────────────────── */
 .has-js .rv{opacity:0;translate:0 20px;transition:opacity .7s ease,translate .7s cubic-bezier(.2,.7,.3,1)}
 .has-js .rv.in{opacity:1;translate:0 0}
@@ -242,9 +310,17 @@ a.row:hover .row-cta svg{translate:5px 0}
   <div class="wrap nav-in">
     <a class="mark" href="#top"><b>Ankit Soni</b> <span>— Product &amp; UX</span></a>
     <nav class="nav-links" aria-label="Elsewhere">
-      <a href="https://www.linkedin.com/in/ankitesm/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://www.behance.net/ankitesm" target="_blank" rel="noopener">Behance</a>
-      <a href="https://drive.google.com/file/d/1cHlNWVuyDeQFEfJDywzNH1CUMHHmRTby/view?usp=sharing" target="_blank" rel="noopener">Résumé</a>
+      <a href="https://www.linkedin.com/in/ankitesm/" target="_blank" rel="noopener"><span lang="en" data-l="en">LinkedIn</span><span lang="hi" data-l="hi">लिंक्डइन</span></a>
+      <a href="https://www.behance.net/ankitesm" target="_blank" rel="noopener"><span lang="en" data-l="en">Behance</span><span lang="hi" data-l="hi">बिहांस</span></a>
+      <a href="https://drive.google.com/file/d/1cHlNWVuyDeQFEfJDywzNH1CUMHHmRTby/view?usp=sharing" target="_blank" rel="noopener"><span lang="en" data-l="en">Résumé</span><span lang="hi" data-l="hi">रेज़्यूमे</span></a>
+      <div class="lang" role="group" aria-label="Language / भाषा">
+        <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19"/>
+          <path d="M12 2.5c3 3.1 3 15.9 0 19M12 2.5c-3 3.1-3 15.9 0 19"/>
+        </svg>
+        <button type="button" id="btn-en" aria-pressed="true" lang="en">EN</button>
+        <button type="button" id="btn-hi" aria-pressed="false" lang="hi">हिं</button>
+      </div>
     </nav>
   </div>
 </header>
@@ -255,15 +331,15 @@ a.row:hover .row-cta svg{translate:5px 0}
   <section class="hero">
     <div class="wrap hero-in">
       <div class="hero-copy">
-        <p class="tag">Product &amp; UX designer · India</p>
-        <h1 class="name">Ankit Soni</h1>
-        <p class="role">I design products people can actually get through.</p>
-        <p class="lede">Five years across health, hiring and fintech — research first, build-ready files at the end. Currently designing at Bacancy Technology.</p>
+        <p class="tag"><span lang="en" data-l="en">Product &amp; UX designer · India</span><span lang="hi" data-l="hi">कुछ अच्छा करता है। भारत में रहता है।</span></p>
+        <h1 class="name"><span lang="en" data-l="en">Ankit Soni</span><span lang="hi" data-l="hi">नमस्कार, मैं अंकित सोनी हूँ।</span></h1>
+        <p class="role"><span lang="en" data-l="en">I design products people can actually get through.</span><span lang="hi" data-l="hi">मैं ऐसे प्रोडक्ट डिज़ाइन करता हूँ जिन्हें लोग आसानी से इस्तेमाल कर सकें।</span></p>
+        <p class="lede"><span lang="en" data-l="en">Five years across health, hiring and fintech — research first, build-ready files at the end. Currently designing at Bacancy Technology.</span><span lang="hi" data-l="hi">आपका स्वागत है। मैं मुख्य रूप से एक कैनवास पर कुछ ऐसा बनाता हूँ जो बेहतरीन हो और उपयोगकर्ता को पसंद भी आए। हेल्थकेयर, फ़िनटेक और हायरिंग जैसे कई क्षेत्रों में काम किया है।</span></p>
         <div class="btns">
-          <a class="btn btn--solid" href="#work">See the work
+          <a class="btn btn--solid" href="#work"><span lang="en" data-l="en">See the work</span><span lang="hi" data-l="hi">काम देखिए</span>
             <svg viewBox="0 0 19 13" aria-hidden="true"><path fill="currentColor" d="M18.53 7.03a.75.75 0 0 0 0-1.06L13.76 1.2a.75.75 0 1 0-1.06 1.06L16.94 6.5l-4.24 4.24a.75.75 0 1 0 1.06 1.06l4.77-4.77ZM0 7.25h18v-1.5H0v1.5Z"/></svg>
           </a>
-          <a class="btn btn--line" href="#contact">Get in touch</a>
+          <a class="btn btn--line" href="#contact"><span lang="en" data-l="en">Get in touch</span><span lang="hi" data-l="hi">संपर्क करें</span></a>
         </div>
       </div>
 
@@ -279,31 +355,40 @@ a.row:hover .row-cta svg{translate:5px 0}
 
   <div class="strip">
     <div class="wrap strip-in">
-      <div class="cell"><b>5 yrs</b><span class="tag">Designing products</span></div>
-      <div class="cell"><b>7+</b><span class="tag">Shipped projects</span></div>
-      <div class="cell"><b>3</b><span class="tag">Industries</span></div>
+      <div class="cell"><b><span lang="en" data-l="en">5 yrs</span><span lang="hi" data-l="hi">5 साल</span></b><span class="tag"><span lang="en" data-l="en">Designing products</span><span lang="hi" data-l="hi">डिज़ाइन करते हुए</span></span></div>
+      <div class="cell"><b>7+</b><span class="tag"><span lang="en" data-l="en">Shipped projects</span><span lang="hi" data-l="hi">पूरे हुए प्रोजेक्ट</span></span></div>
+      <div class="cell"><b>3</b><span class="tag"><span lang="en" data-l="en">Industries</span><span lang="hi" data-l="hi">क्षेत्र</span></span></div>
     </div>
   </div>
 
   <!-- ───────── about ───────── -->
   <section class="band" id="about">
     <div class="wrap band-in">
-      <p class="gutter tag"><span class="dot" aria-hidden="true"></span>About</p>
+      <p class="gutter tag"><span class="dot" aria-hidden="true"></span><span lang="en" data-l="en">About</span><span lang="hi" data-l="hi">परिचय</span></p>
       <div class="rv">
-        <h2 class="h2">I came to design<br>from physics.</h2>
+        <h2 class="h2"><span lang="en" data-l="en">I came to design<br>from physics.</span><span lang="hi" data-l="hi">मैं भौतिकी से डिज़ाइन में आया हूँ।</span></h2>
 
         <figure class="figure">
           <div class="eq" role="img" aria-label="E equals m c squared, reframed as empathy equals modern consumer experiences">
-            <div class="term"><span class="term-g">E</span><span class="leader" aria-hidden="true"></span><span class="term-l">Empathy</span></div>
+            <div class="term"><span class="term-g">E</span><span class="leader" aria-hidden="true"></span><span class="term-l"><span lang="en" data-l="en">Empathy</span><span lang="hi" data-l="hi">सहानुभूति</span></span></div>
             <span class="eq-op" aria-hidden="true">=</span>
-            <div class="term"><span class="term-g">m</span><span class="leader" aria-hidden="true"></span><span class="term-l">Modern</span></div>
-            <div class="term"><span class="term-g">c<sup>2</sup></span><span class="leader" aria-hidden="true"></span><span class="term-l">Consumer<br>experiences</span></div>
+            <div class="term"><span class="term-g">m</span><span class="leader" aria-hidden="true"></span><span class="term-l"><span lang="en" data-l="en">Modern</span><span lang="hi" data-l="hi">आधुनिक</span></span></div>
+            <div class="term"><span class="term-g">c<sup>2</sup></span><span class="leader" aria-hidden="true"></span><span class="term-l"><span lang="en" data-l="en">Consumer<br>experiences</span><span lang="hi" data-l="hi">उपभोक्ता<br>अनुभव</span></span></div>
           </div>
-          <figcaption class="figcap">The equation stuck with me because it describes a conversion — one thing becoming another without anything being lost. Read my way, empathy is the input, and everything downstream is the interface people end up holding.</figcaption>
+          <figcaption class="figcap"><span lang="en" data-l="en">The equation stuck with me because it describes a conversion — one thing becoming another without anything being lost. Read my way, empathy is the input, and everything downstream is the interface people end up holding.</span><span lang="hi" data-l="hi">यह समीकरण मुझे इसलिए पसंद है कि यह एक रूपांतरण की बात करता है — एक चीज़ का दूसरी में बदल जाना, बिना कुछ खोए। मेरे हिसाब से सहानुभूति इनपुट है, और उसके बाद जो बनता है वही वह इंटरफ़ेस है जो लोगों के हाथ में पहुँचता है।</span></figcaption>
         </figure>
 
-        <p class="about-copy">In practice that means I start with interviews and end with a build-ready file. I've spent five years on products where the stakes are real: a patient trying to find a report, a recruiter working through a hundred candidates, a first-time investor deciding what a number means.</p>
-        <p class="about-copy">I research before I draw, and I keep drawing until the flow survives someone else using it.</p>
+        <div class="about-cols" lang="en" data-l="en">
+          <p class="about-copy">In practice that means I start with interviews and end with a build-ready file. I've spent five years on products where the stakes are real: a patient trying to find a report, a recruiter working through a hundred candidates, a first-time investor deciding what a number means.</p>
+          <p class="about-copy">I research before I draw, and I keep drawing until the flow survives someone else using it.</p>
+        </div>
+        <div class="about-cols" lang="hi" data-l="hi">
+          <p class="about-copy">भौतिकी और डिज़ाइन दो अलग क्षेत्र लग सकते हैं, पर ध्यान से देखें तो सब कुछ एक ही है। दुनिया की हर चीज़ को बहुत ध्यान से देखें तो वह इलेक्ट्रॉन, न्यूट्रॉन और प्रोटॉन से बनी है। और किसी भी भौतिक या वर्चुअल चीज़ को ध्यान से देखें तो उसमें कुछ पैटर्न होते हैं। उन्हीं पैटर्न को जब व्यवस्थित रूप से देखा जाए, तो वे एक रचना, अभिकल्प या ख़ाका तैयार करते हैं — जिसे डिज़ाइन कहा जाता है। ख़ैर, दर्शन को थोड़ा किनारे रखते हैं और प्रोडक्ट डिज़ाइन पर आते हैं।</p>
+          <p class="about-copy">मेरे लिए डिज़ाइन महज़ एक फ़ाइल में भरे कुछ रंग नहीं, बल्कि एक सुव्यवस्थित रूपरेखा है — जो भौतिकी की तरह ही किसी समस्या का समाधान करती है।</p>
+          <p class="about-copy">और भौतिकी की तरह डिज़ाइन को भी मैं चीज़ें हल करने का एक ज़रिया मानता हूँ।</p>
+          <p class="about-copy">डिज़ाइन इससे ऊपर है कि वह कैसी दिखती है — असल बात यह है कि वह कैसे काम करती है, हम उसे कैसा महसूस करते हैं, और क्या हम उस अनुभव से ख़ुश हैं।</p>
+          <p class="about-copy">अनुभव से याद आया — मेरे पिछले कुछ अनुभव और उनमें किए गए काम आप नीचे देख सकते हैं।</p>
+        </div>
       </div>
     </div>
   </section>
@@ -311,9 +396,9 @@ a.row:hover .row-cta svg{translate:5px 0}
   <!-- ───────── work ───────── -->
   <section class="band" id="work">
     <div class="wrap band-in">
-      <p class="gutter tag"><span class="dot" aria-hidden="true"></span>Work</p>
+      <p class="gutter tag"><span class="dot" aria-hidden="true"></span><span lang="en" data-l="en">Work</span><span lang="hi" data-l="hi">काम</span></p>
       <div class="rv">
-        <h2 class="h2">Seven projects,<br>three industries.</h2>
+        <h2 class="h2"><span lang="en" data-l="en">Seven projects,<br>three industries.</span><span lang="hi" data-l="hi">सात प्रोजेक्ट, तीन क्षेत्र।</span></h2>
 
         <div class="rows">
 
@@ -400,9 +485,9 @@ a.row:hover .row-cta svg{translate:5px 0}
   <!-- ───────── skills ───────── -->
   <section class="band" id="skills">
     <div class="wrap band-in">
-      <p class="gutter tag"><span class="dot" aria-hidden="true"></span>Toolkit</p>
+      <p class="gutter tag"><span class="dot" aria-hidden="true"></span><span lang="en" data-l="en">Toolkit</span><span lang="hi" data-l="hi">कौशल</span></p>
       <div class="rv">
-        <h2 class="h2">What I do,<br>and what with.</h2>
+        <h2 class="h2"><span lang="en" data-l="en">What I do,<br>and what with.</span><span lang="hi" data-l="hi">क्या करता हूँ, और किससे।</span></h2>
         <div class="stacks">
           <div class="stack">
             <h3>Design</h3>
@@ -424,9 +509,9 @@ a.row:hover .row-cta svg{translate:5px 0}
   <!-- ───────── experience ───────── -->
   <section class="band" id="path">
     <div class="wrap band-in">
-      <p class="gutter tag"><span class="dot" aria-hidden="true"></span>Where</p>
+      <p class="gutter tag"><span class="dot" aria-hidden="true"></span><span lang="en" data-l="en">Where</span><span lang="hi" data-l="hi">अनुभव</span></p>
       <div class="rv">
-        <h2 class="h2">Five years,<br>three teams.</h2>
+        <h2 class="h2"><span lang="en" data-l="en">Five years,<br>three teams.</span><span lang="hi" data-l="hi">पाँच साल, तीन टीमें।</span></h2>
         <div class="track">
           <article class="stop stop--now">
             <h3>Bacancy Technology</h3><p>UX / UI Designer</p><span class="yrs">2024 — Present</span>
@@ -448,8 +533,8 @@ a.row:hover .row-cta svg{translate:5px 0}
 <footer class="foot" id="contact">
   <div class="wrap">
     <div class="rv">
-      <p class="tag" style="margin-bottom:18px">Available for new projects</p>
-      <h2 class="foot-h">Let's work<br>together</h2>
+      <p class="tag" style="margin-bottom:18px"><span lang="en" data-l="en">Available for new projects</span><span lang="hi" data-l="hi">नए प्रोजेक्ट के लिए उपलब्ध</span></p>
+      <h2 class="foot-h"><span lang="en" data-l="en">Let's work<br>together</span><span lang="hi" data-l="hi">चलिए, साथ काम करें।</span></h2>
       <a class="mailto" href="mailto:ankit1218soni@gmail.com">
         ankit1218soni@gmail.com
         <svg viewBox="0 0 19 13" aria-hidden="true"><path fill="currentColor" d="M18.53 7.03a.75.75 0 0 0 0-1.06L13.76 1.2a.75.75 0 1 0-1.06 1.06L16.94 6.5l-4.24 4.24a.75.75 0 1 0 1.06 1.06l4.77-4.77ZM0 7.25h18v-1.5H0v1.5Z"/></svg>
@@ -467,6 +552,34 @@ a.row:hover .row-cta svg{translate:5px 0}
 </footer>
 
 <script>
+/* ── language switch ───────────────────────────────────────────────────── */
+(function () {
+  var root = document.documentElement, en = document.getElementById("btn-en"), hi = document.getElementById("btn-hi"), loaded = false;
+
+  function fonts() {                      /* Devanagari only fetched when needed */
+    if (loaded) return; loaded = true;
+    var l = document.createElement("link");
+    l.rel = "stylesheet";
+    l.href = "https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=Anek+Devanagari:wght@400;500;600&display=swap&subset=devanagari,latin";
+    document.head.appendChild(l);
+  }
+  function set(lang, remember) {
+    var isHi = lang === "hi";
+    if (isHi) fonts();
+    root.classList.toggle("hi", isHi);
+    root.setAttribute("lang", isHi ? "hi" : "en");
+    en.setAttribute("aria-pressed", String(!isHi));
+    hi.setAttribute("aria-pressed", String(isHi));
+    if (remember) { try { localStorage.setItem("lang", lang); } catch (e) {} }
+  }
+  en.addEventListener("click", function () { set("en", true); });
+  hi.addEventListener("click", function () { set("hi", true); });
+
+  var saved; try { saved = localStorage.getItem("lang"); } catch (e) {}
+  if (!saved && (navigator.language || "").toLowerCase().indexOf("hi") === 0) saved = "hi";
+  if (saved === "hi") set("hi", false);
+})();
+
 document.getElementById("yr").textContent = new Date().getFullYear();
 var items = document.querySelectorAll(".rv");
 if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {

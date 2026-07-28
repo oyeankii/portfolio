@@ -244,6 +244,56 @@ a.row:hover .row-cta svg{translate:5px 0}
 .foot-end a:hover{color:var(--ink)}
 .foot-end nav{display:flex;gap:20px}
 
+/* ─── gravity ────────────────────────────────────────────────── */
+.g-btn{
+  appearance:none;background:transparent;cursor:pointer;align-self:center;
+  border:1px solid var(--rule);border-radius:999px;padding:.62em .95em;
+  display:inline-flex;align-items:center;gap:7px;color:var(--ink-45);
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;
+  transition:color .22s,border-color .22s;
+}
+.g-btn:hover{color:var(--ink);border-color:var(--ink)}
+.g-btn svg{width:11px;height:11px;flex:0 0 auto}
+.g-bit{display:inline-block}
+.g-fall{position:absolute!important;margin:0!important;z-index:1}
+#grav{position:relative}
+#grav.dropping{overflow:hidden}
+@media (prefers-reduced-motion:reduce){.g-btn{display:none}}
+
+#gz{
+  position:fixed;inset:0;z-index:70;background:var(--bg);
+  display:none;opacity:0;transition:opacity .5s ease;
+}
+#gz.on{display:grid;place-items:center;padding:clamp(24px,6vw,80px)}
+#gz.vis{opacity:1}
+.gz-in{
+  max-width:32ch;text-align:center;opacity:0;translate:0 16px;
+  transition:opacity .6s ease .3s,translate .7s cubic-bezier(.16,.84,.24,1) .3s;
+}
+#gz.vis .gz-in{opacity:1;translate:0 0}
+.gz-h{font-family:var(--display);font-weight:800;letter-spacing:-.042em;line-height:1.04;font-size:clamp(1.9rem,6vw,3.5rem)}
+.gz-h [lang="hi"]{font-family:"Tiro Devanagari Hindi",serif;font-weight:400;letter-spacing:0;line-height:1.35;font-size:.82em;display:inline-block}
+.gz-p{color:var(--ink-70);margin-top:16px}
+.gz-cta{
+  margin-top:clamp(24px,3.5vw,34px);text-decoration:none;
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--ink);color:#fff;border:1px solid var(--ink);border-radius:2px;
+  font-family:var(--mono);font-size:.6875rem;letter-spacing:.13em;text-transform:uppercase;
+  padding:1em 1.5em;transition:background-color .25s;
+}
+.gz-cta:hover{background:#000}
+.gz-cta svg{width:16px;height:9px;flex:0 0 auto;transition:translate .28s cubic-bezier(.2,.7,.3,1)}
+.gz-cta:hover svg{translate:4px 0}
+.gz-cta [lang="hi"]{font-family:"Anek Devanagari",sans-serif;letter-spacing:normal;text-transform:none;font-size:.875rem}
+.gz-back{
+  display:block;margin:20px auto 0;background:none;border:0;cursor:pointer;
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-45);transition:color .22s;
+}
+.gz-back:hover{color:var(--ink)}
+.gz-back [lang="hi"]{font-family:"Anek Devanagari",sans-serif;letter-spacing:normal;text-transform:none;font-size:.8125rem}
+body.locked{overflow:hidden}
+
 /* ─── language switch ────────────────────────────────────────── */
 html:not(.hi) [data-l="hi"]{display:none !important}
 html.hi [data-l="en"]{display:none !important}
@@ -532,7 +582,7 @@ html.hi .figcap{max-width:40ch}
 <!-- ───────── contact ───────── -->
 <footer class="foot" id="contact">
   <div class="wrap">
-    <div class="rv">
+    <div class="rv" id="grav">
       <p class="tag" style="margin-bottom:18px"><span lang="en" data-l="en">Available for new projects</span><span lang="hi" data-l="hi">नए प्रोजेक्ट के लिए उपलब्ध</span></p>
       <h2 class="foot-h"><span lang="en" data-l="en">Let's work<br>together</span><span lang="hi" data-l="hi">चलिए, साथ काम करें।</span></h2>
       <a class="mailto" href="mailto:ankit1218soni@gmail.com">
@@ -547,9 +597,31 @@ html.hi .figcap{max-width:40ch}
         <a href="https://www.behance.net/ankitesm" target="_blank" rel="noopener">Behance</a>
         <a href="https://drive.google.com/file/d/1cHlNWVuyDeQFEfJDywzNH1CUMHHmRTby/view?usp=sharing" target="_blank" rel="noopener">Résumé</a>
       </nav>
+      <button type="button" class="g-btn" id="grav-btn" aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v14M6 13l6 6 6-6"/></svg>
+        <span lang="en" data-l="en">Gravity off</span><span lang="hi" data-l="hi">गुरुत्वाकर्षण बंद</span>
+      </button>
     </div>
   </div>
 </footer>
+
+<div id="gz" role="dialog" aria-modal="true" aria-labelledby="gz-h">
+  <div class="gz-in">
+    <h2 class="gz-h" id="gz-h">
+      <span lang="en" data-l="en">Without structure, everything falls.</span><span lang="hi" data-l="hi">बिना व्यवस्था, सब कुछ गिर जाता है।</span>
+    </h2>
+    <p class="gz-p">
+      <span lang="en" data-l="en">Putting it back is the job.</span><span lang="hi" data-l="hi">उसे व्यवस्थित करना ही मेरा काम है।</span>
+    </p>
+    <a class="gz-cta" href="mailto:ankit1218soni@gmail.com?subject=Let%27s%20work%20together">
+      <span lang="en" data-l="en">Hire me</span><span lang="hi" data-l="hi">मुझे हायर करें</span>
+      <svg viewBox="0 0 19 13" aria-hidden="true"><path fill="currentColor" d="M18.53 7.03a.75.75 0 0 0 0-1.06L13.76 1.2a.75.75 0 1 0-1.06 1.06L16.94 6.5l-4.24 4.24a.75.75 0 1 0 1.06 1.06l4.77-4.77ZM0 7.25h18v-1.5H0v1.5Z"/></svg>
+    </a>
+    <button type="button" class="gz-back" id="gz-back">
+      <span lang="en" data-l="en">Gravity back on</span><span lang="hi" data-l="hi">गुरुत्वाकर्षण वापस चालू करें</span>
+    </button>
+  </div>
+</div>
 
 <script>
 /* ── language switch ───────────────────────────────────────────────────── */
@@ -566,6 +638,7 @@ html.hi .figcap{max-width:40ch}
   function set(lang, remember) {
     var isHi = lang === "hi";
     if (isHi) fonts();
+    if (window.__gravOff) window.__gravOff();
     root.classList.toggle("hi", isHi);
     root.setAttribute("lang", isHi ? "hi" : "en");
     en.setAttribute("aria-pressed", String(!isHi));
@@ -578,6 +651,140 @@ html.hi .figcap{max-width:40ch}
   var saved; try { saved = localStorage.getItem("lang"); } catch (e) {}
   if (!saved && (navigator.language || "").toLowerCase().indexOf("hi") === 0) saved = "hi";
   if (saved === "hi") set("hi", false);
+})();
+
+/* ── gravity: the "Let's work together" block collapses, then the ask ──────
+   The bottom row (©, links, trigger) stays put and doubles as the ground.
+   Falling unit is the word, never the character — Devanagari conjuncts and
+   matras come apart if you split per glyph.
+────────────────────────────────────────────────────────────────────────── */
+(function () {
+  var stage = document.getElementById("grav"),
+      gz    = document.getElementById("gz");
+  if (!stage || !gz) return;
+
+  var G = 0.62, BOUNCE = 0.3, FRICTION = 0.86;
+  var bits = [], raf = null, timers = [], snapshot = null, live = false, lastFocus = null;
+
+  function after(ms, fn) { timers.push(setTimeout(fn, ms)); }
+  function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+
+  function words(el) {
+    if (!el) return;
+    var tw = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null), t = [], n;
+    while ((n = tw.nextNode())) t.push(n);
+    t.forEach(function (node) {
+      if (!node.nodeValue.trim()) return;
+      var frag = document.createDocumentFragment();
+      node.nodeValue.split(/(\s+)/).forEach(function (part) {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+        var s = document.createElement("span");
+        s.className = "g-bit"; s.textContent = part;
+        frag.appendChild(s);
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
+  }
+
+  function inView(fn) {
+    var r = stage.getBoundingClientRect();
+    if (r.top >= 0 && r.bottom <= window.innerHeight) { fn(); return; }
+    try { stage.scrollIntoView({ behavior: "smooth", block: "center" }); }
+    catch (e) { stage.scrollIntoView(); }
+    var t0 = Date.now(), last = -1;
+    (function wait() {                                 /* smooth-scroll timing varies by browser */
+      var y = window.scrollY;
+      if ((y === last && Date.now() - t0 > 260) || Date.now() - t0 > 1300) { after(100, fn); return; }
+      last = y;
+      requestAnimationFrame(wait);
+    })();
+  }
+
+  function drop() {
+    live = true;
+    snapshot = stage.innerHTML;
+    stage.style.minHeight = stage.getBoundingClientRect().height + "px";
+    stage.classList.add("dropping");
+
+    words(stage.querySelector(".tag"));
+    words(stage.querySelector(".foot-h"));
+
+    var targets = [].slice.call(stage.querySelectorAll(".g-bit"))
+      .concat([stage.querySelector(".mailto")]).filter(Boolean);
+
+    var box = stage.getBoundingClientRect();
+    bits = targets.map(function (el) {                 /* measure everything first */
+      var r = el.getBoundingClientRect();
+      return { el: el, x0: r.left - box.left, y0: r.top - box.top, w: r.width, h: r.height };
+    });
+    bits.forEach(function (b) {                        /* then lift out of flow */
+      b.el.classList.add("g-fall");
+      b.el.style.left = b.x0 + "px"; b.el.style.top = b.y0 + "px"; b.el.style.width = b.w + "px";
+      b.x = b.x0; b.y = b.y0; b.a = 0;
+      b.vx = (Math.random() - 0.5) * 3;
+      b.vy = Math.random() * 1.3;
+      b.va = (Math.random() - 0.5) * 8;
+    });
+    raf = requestAnimationFrame(step);
+  }
+
+  function step() {
+    var floor = stage.clientHeight, wall = stage.clientWidth, moving = false;
+    bits.forEach(function (b) {
+      b.vy += G; b.y += b.vy; b.x += b.vx; b.a += b.va;
+      if (b.y + b.h >= floor) {
+        b.y = floor - b.h;
+        if (Math.abs(b.vy) > 0.7) { b.vy = -b.vy * BOUNCE; b.vx *= FRICTION; b.va *= FRICTION; }
+        else { b.vy = 0; b.vx *= 0.8; b.va *= 0.8; }
+      }
+      if (b.x < 0) { b.x = 0; b.vx = -b.vx * 0.5; b.va = -b.va; }
+      if (b.x + b.w > wall) { b.x = wall - b.w; b.vx = -b.vx * 0.5; b.va = -b.va; }
+      if (Math.abs(b.vy) > 0.4 || Math.abs(b.vx) > 0.4 || Math.abs(b.va) > 0.4) moving = true;
+      b.el.style.transform = "translate(" + (b.x - b.x0) + "px," + (b.y - b.y0) + "px) rotate(" + b.a + "deg)";
+    });
+    raf = moving ? requestAnimationFrame(step) : (whiteOut(), null);
+  }
+
+  function whiteOut() {
+    after(320, function () {                           /* screen clears */
+      lastFocus = document.activeElement;
+      gz.classList.add("on");
+      document.body.classList.add("locked");
+      requestAnimationFrame(function () { gz.classList.add("vis"); });
+      after(560, function () { var c = gz.querySelector(".gz-cta"); if (c) c.focus(); });
+    });
+  }
+
+  function restore() {
+    clearTimers();
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+    gz.classList.remove("vis");
+    document.body.classList.remove("locked");
+    after(480, function () {
+      gz.classList.remove("on");
+      if (snapshot !== null) stage.innerHTML = snapshot;
+      stage.classList.remove("dropping");
+      stage.style.minHeight = "";
+      bits = []; live = false;
+      var b = document.getElementById("grav-btn");
+      if (b) b.focus(); else if (lastFocus && lastFocus.focus) lastFocus.focus();
+    });
+  }
+
+  window.__gravOff = function () { if (live) restore(); };
+
+  document.addEventListener("click", function (e) {
+    if (e.target.closest("#grav-btn")) {
+      if (live || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      inView(drop);
+      return;
+    }
+    if (e.target.closest("#gz-back")) restore();
+    if (e.target.closest(".gz-cta")) after(120, restore);   /* clean page to come back to */
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && live) restore(); });
+  window.addEventListener("resize", function () { if (live) restore(); });
 })();
 
 document.getElementById("yr").textContent = new Date().getFullYear();

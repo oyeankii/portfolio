@@ -23,6 +23,8 @@
 <meta name="twitter:image" content="https://www.oyedesigner.in/og-card.jpg">
 <meta name="twitter:image:alt" content="Ankit Soni — Product &amp; UX Designer">
 <link rel="canonical" href="https://www.oyedesigner.in/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2032%2032%22%3E%3Crect%20width=%2232%22%20height=%2232%22%20rx=%227%22%20fill=%22%230F0F11%22/%3E%3Cpath%20d=%22M9.2%2024.2%2016%208.4%2022.8%2024.2%22%20fill=%22none%22%20stroke=%22%23fff%22%20stroke-width=%223.1%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22/%3E%3Cpath%20d=%22M12.1%2018.4h7.8%22%20fill=%22none%22%20stroke=%22%23fff%22%20stroke-width=%223.1%22%20stroke-linecap=%22round%22/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0F0F11">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -245,20 +247,23 @@ a.row:hover .row-cta svg{translate:5px 0}
 .foot-end nav{display:flex;gap:20px}
 
 /* ─── gravity ────────────────────────────────────────────────── */
+.grav-row{margin-top:clamp(30px,4vw,46px)}
 .g-btn{
-  appearance:none;background:transparent;cursor:pointer;align-self:center;
-  border:1px solid var(--rule);border-radius:999px;padding:.62em .95em;
-  display:inline-flex;align-items:center;gap:7px;color:var(--ink-45);
-  font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;
-  transition:color .22s,border-color .22s;
+  appearance:none;background:transparent;cursor:pointer;
+  border:1px solid rgba(15,15,17,.45);border-radius:999px;padding:.72em 1.1em;
+  display:inline-flex;align-items:center;gap:9px;color:var(--ink-70);
+  font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;
+  transition:color .22s,border-color .22s,background-color .22s;
 }
-.g-btn:hover{color:var(--ink);border-color:var(--ink)}
-.g-btn svg{width:11px;height:11px;flex:0 0 auto}
+.g-btn:hover,.g-btn:focus-visible{color:#fff;background:var(--ink);border-color:var(--ink)}
+.g-btn svg{width:12px;height:12px;flex:0 0 auto;animation:g-bob 2.6s ease-in-out infinite}
+.g-btn [lang="hi"]{font-family:"Anek Devanagari",sans-serif;font-size:.875rem;letter-spacing:normal;text-transform:none}
+@keyframes g-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
 .g-bit{display:inline-block}
 .g-fall{position:absolute!important;margin:0!important;z-index:1}
 #grav{position:relative}
 #grav.dropping{overflow:hidden}
-@media (prefers-reduced-motion:reduce){.g-btn{display:none}}
+@media (prefers-reduced-motion:reduce){.g-btn svg{animation:none}}
 
 #gz{
   position:fixed;inset:0;z-index:70;background:var(--bg);
@@ -590,6 +595,12 @@ html.hi .figcap{max-width:40ch}
         <svg viewBox="0 0 19 13" aria-hidden="true"><path fill="currentColor" d="M18.53 7.03a.75.75 0 0 0 0-1.06L13.76 1.2a.75.75 0 1 0-1.06 1.06L16.94 6.5l-4.24 4.24a.75.75 0 1 0 1.06 1.06l4.77-4.77ZM0 7.25h18v-1.5H0v1.5Z"/></svg>
       </a>
     </div>
+    <div class="grav-row">
+      <button type="button" class="g-btn" id="grav-btn" aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v14M6 13l6 6 6-6"/></svg>
+        <span lang="en" data-l="en">What if gravity stopped?</span><span lang="hi" data-l="hi">अगर गुरुत्वाकर्षण बंद हो जाए?</span>
+      </button>
+    </div>
     <div class="foot-end tag">
       <span>© <span id="yr">2026</span> Ankit Soni</span>
       <nav aria-label="Social">
@@ -597,10 +608,6 @@ html.hi .figcap{max-width:40ch}
         <a href="https://www.behance.net/ankitesm" target="_blank" rel="noopener">Behance</a>
         <a href="https://drive.google.com/file/d/1cHlNWVuyDeQFEfJDywzNH1CUMHHmRTby/view?usp=sharing" target="_blank" rel="noopener">Résumé</a>
       </nav>
-      <button type="button" class="g-btn" id="grav-btn" aria-haspopup="dialog">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v14M6 13l6 6 6-6"/></svg>
-        <span lang="en" data-l="en">Gravity off</span><span lang="hi" data-l="hi">गुरुत्वाकर्षण बंद</span>
-      </button>
     </div>
   </div>
 </footer>
@@ -776,7 +783,11 @@ html.hi .figcap{max-width:40ch}
 
   document.addEventListener("click", function (e) {
     if (e.target.closest("#grav-btn")) {
-      if (live || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (live) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        live = true; snapshot = null; whiteOut();       /* the message, without the tumble */
+        return;
+      }
       inView(drop);
       return;
     }

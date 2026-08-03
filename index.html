@@ -328,9 +328,9 @@ html.hi .lede{max-width:44ch}
 html.hi .figcap{max-width:40ch}
 
 /* toggle control */
-.lang{display:inline-flex;align-items:center;border:1px solid var(--rule);border-radius:999px;overflow:hidden;flex:0 0 auto}
+.lang{display:inline-flex;align-items:center;border:1px solid var(--rule);border-radius:0;overflow:hidden;flex:0 0 auto;margin-left:6px}
 .lang .globe{
-  width:13px;height:13px;flex:0 0 auto;margin:0 -2px 0 9px;color:var(--ink-45);
+  width:13px;height:13px;flex:0 0 auto;margin:0 7px 0 11px;color:var(--ink-45);
   transition:color .22s;
 }
 .lang:hover .globe{color:var(--ink)}
@@ -655,8 +655,10 @@ html.hi .figcap{max-width:40ch}
   en.addEventListener("click", function () { set("en", true); });
   hi.addEventListener("click", function () { set("hi", true); });
 
+  /* English always, unless this visitor previously chose Hindi themselves.
+     No navigator.language sniffing — a Hindi-locale browser opening a shared
+     link should still get English first. */
   var saved; try { saved = localStorage.getItem("lang"); } catch (e) {}
-  if (!saved && (navigator.language || "").toLowerCase().indexOf("hi") === 0) saved = "hi";
   if (saved === "hi") set("hi", false);
 })();
 

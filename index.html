@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ankit Soni — Product & UX Designer</title>
 <meta name="description" content="Ankit Soni — Product and UX designer.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23141414'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Arial,sans-serif' font-size='34' font-weight='700' fill='%23ffffff'%3EA%3C/text%3E%3C/svg%3E">
+<link id="dynamic-favicon" rel="icon" type="image/svg+xml" href="">
 <style>
 *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:#090909;color:#f5f5f5;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;line-height:1.55}
 a{color:inherit} img{display:block;max-width:100%} .container{width:min(100% - 32px,760px);margin:auto}
@@ -158,4 +158,45 @@ h1,h2,h3,p{margin:0} h1{font-size:24px;line-height:1.2;letter-spacing:-.035em;fo
 <section class="section"><div class="container"><div class="contact-card"><div class="available"><i class="dot"></i>Available for new projects</div><h2 style="margin-top:10px">Ready to build something useful?</h2><p>For product design, UX/UI, design systems and collaboration, reach out by email.</p><div class="actions"><a class="btn" href="mailto:ankit1218soni@gmail.com">Send an Email</a><a class="btn" href="https://www.linkedin.com/in/ankitesm/" target="_blank">LinkedIn ↗</a></div></div></div></section>
 </main>
 <footer><div class="container">© 2026 Ankit Soni</div></footer>
+
+<script>
+(function () {
+  const favicon = document.getElementById('dynamic-favicon');
+  if (!favicon) return;
+
+  const frames = [
+    { text: 'A', circle: true },
+    { text: 'Hire Me', circle: false },
+    { text: 'Ankit', circle: false },
+    { text: 'Portfolio', circle: false }
+  ];
+
+  let index = 0;
+
+  function escapeSvg(text) {
+    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function setFavicon(frame) {
+    const text = escapeSvg(frame.text);
+    const isSmall = frame.text.length <= 1;
+    const fontSize = isSmall ? 34 : (frame.text.length <= 7 ? 17 : 14);
+    const fontWeight = isSmall ? 700 : 600;
+    const svg = frame.circle
+      ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#141414"/><text x="32" y="43" text-anchor="middle" font-family="Arial,sans-serif" font-size="${fontSize}" font-weight="${fontWeight}" fill="#fff">${text}</text></svg>`
+      : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect x="1" y="1" width="62" height="62" rx="14" fill="#141414"/><text x="32" y="38" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="${fontSize}" font-weight="${fontWeight}" fill="#fff">${text}</text></svg>`;
+
+    favicon.href = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  }
+
+  setFavicon(frames[0]);
+
+  // Change every 1.5s: A → Hire Me → Ankit → Portfolio → A
+  setInterval(function () {
+    index = (index + 1) % frames.length;
+    setFavicon(frames[index]);
+  }, 1500);
+})();
+</script>
+
 </body></html>

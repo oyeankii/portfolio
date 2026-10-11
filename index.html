@@ -174,6 +174,27 @@ footer a{text-decoration:none}footer a:hover{color:var(--accent)}
 
 @media(max-width:860px){.sec-head{grid-template-columns:1fr}.sec-head p{justify-self:start}.feature{grid-template-columns:1fr;min-height:0}.exp{grid-template-columns:1fr;gap:14px}.exp .date{padding:0}}
 @media(max-width:620px){.row{grid-template-columns:56px minmax(0,1fr);gap:14px}.thumb{width:56px;height:56px;border-radius:12px}.row-cta{grid-column:2}.row-cta b{width:32px;height:32px}.row:hover{padding-left:0;padding-right:0}.row:before{display:none}}
+/* Mobile fixes: keep decorative glyphs behind content and prevent overlap */
+.feature-mark,.contact .big-ast{
+  font-family:Inter,ui-sans-serif,Arial,sans-serif;
+  font-variant-emoji:text;
+  pointer-events:none;
+}
+.feature > div,.contact > div{position:relative;z-index:1}
+@media(max-width:620px){
+  .feature{padding:24px 20px;border-radius:20px;gap:26px}
+  .feature-mark{font-size:96px;line-height:1;right:8px;top:8px;opacity:.55;animation:none}
+  .feature h3{font-size:clamp(48px,14vw,72px);line-height:.9;overflow-wrap:anywhere;margin-top:42px}
+  .feature p{position:relative;z-index:1;font-size:15px;max-width:100%;overflow-wrap:anywhere}
+  .feature .links{position:relative;z-index:2;gap:8px}
+  .feature .links a{font-size:12px;padding:10px 14px;max-width:100%}
+  .contact{padding:30px 22px;border-radius:20px}
+  .contact h2{font-size:clamp(42px,12vw,68px);line-height:.9;overflow-wrap:anywhere;position:relative;z-index:1}
+  .contact p{font-size:15px;position:relative;z-index:1;max-width:100%}
+  .contact .actions{position:relative;z-index:2;gap:8px}
+  .contact .actions a{max-width:100%;gap:12px;padding-left:15px;font-size:12px}
+  .contact .big-ast{font-size:100px;right:8px;bottom:8px;line-height:1;opacity:.45;animation:none}
+}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.prisma-asterisk,.prisma-overline,.prisma-title-wrap h1,.prisma-hero-copy,.strip-track,.strip-track span,.feature-mark,.big-ast{animation:none}.reveal{opacity:1;transform:none;transition:none}}
 </style>
 

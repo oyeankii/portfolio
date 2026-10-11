@@ -193,4 +193,575 @@
 
     .exp-list {
       display: grid;
-      gap: 
+      gap: 10px;
+    }
+
+    .exp {
+      border: 1px solid #202020;
+      background: #0d0d0d;
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .exp-top {
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 9px;
+      border: 1px solid #262626;
+      background: #161616;
+      display: grid;
+      place-items: center;
+      font-weight: 650;
+    }
+
+    .exp h3 {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .exp .job {
+      font-size: 12px;
+      color: #929292;
+      margin-top: 2px;
+    }
+
+    .date {
+      font-size: 11px;
+      color: #666;
+      white-space: nowrap;
+    }
+
+    .label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #656565;
+      margin-top: 14px;
+      margin-bottom: 7px;
+    }
+
+    .chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      font-size: 10px;
+      color: #a8a8a8;
+      border: 1px solid #252525;
+      background: #131313;
+      border-radius: 5px;
+      padding: 4px 7px;
+    }
+
+    .done {
+      margin: 8px 0 0;
+      padding-left: 17px;
+      color: #989898;
+      font-size: 12px;
+    }
+
+    .done li + li {
+      margin-top: 4px;
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .tool {
+      border: 1px solid #202020;
+      background: #0d0d0d;
+      border-radius: 9px;
+      padding: 12px 10px;
+      color: #bcbcbc;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .work-section .rows {
+      border-top: 1px solid #222;
+    }
+
+    .work-group {
+      margin-top: 20px;
+    }
+
+    .work-group:first-child {
+      margin-top: 0;
+    }
+
+    .work-group-title {
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .work-section .row {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid #202020;
+      text-decoration: none;
+    }
+
+    .work-section .row:hover {
+      background: #0e0e0e;
+    }
+
+    .thumb {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #151515;
+      border: 1px solid #242424;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .row-t {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .row-d {
+      display: block;
+      color: #7f7f7f;
+      font-size: 11px;
+      margin-top: 3px;
+      max-width: 500px;
+    }
+
+    .row-cta {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      color: #777;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      white-space: nowrap;
+    }
+
+    .row-cta svg {
+      width: 13px;
+    }
+
+    .contact-card {
+      border: 1px solid #222;
+      background: #0d0d0d;
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .contact-card h2 {
+      font-size: 20px;
+      letter-spacing: -.03em;
+    }
+
+    .contact-card p {
+      color: #888;
+      font-size: 12px;
+      margin-top: 8px;
+      max-width: 560px;
+    }
+
+    footer {
+      padding: 0;
+      border-top: 1px solid #1c1c1c;
+      color: #666;
+      font-size: 11px;
+      display: block;
+    }
+
+    .beam-footer {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: #02040b;
+      padding: 72px 0 28px;
+      color: #f3f4f6;
+    }
+
+    .beam-footer:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: linear-gradient(
+        115deg,
+        transparent 25%,
+        rgba(125, 211, 252, .05) 42%,
+        rgba(255, 255, 255, .13) 50%,
+        rgba(125, 211, 252, .05) 58%,
+        transparent 75%
+      );
+      background-size: 220% 100%;
+      animation: footerBeam 9s linear infinite;
+      pointer-events: none;
+    }
+
+    .beam-footer-inner {
+      width: min(100% - 40px, 1100px);
+      margin: auto;
+    }
+
+    .beam-wordmark {
+      font-size: clamp(48px, 12vw, 160px);
+      line-height: .82;
+      font-weight: 750;
+      letter-spacing: -.09em;
+      white-space: nowrap;
+      color: #f3f4f6;
+      text-align: center;
+    }
+
+    .beam-wordmark span {
+      display: inline-block;
+      background: linear-gradient(
+        110deg,
+        #f8fafc 0%,
+        #94a3b8 28%,
+        #fff 46%,
+        #64748b 60%,
+        #f8fafc 78%
+      );
+      background-size: 220% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: wordmarkBeam 7s ease-in-out infinite;
+    }
+
+    .beam-footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 56px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, .14);
+      color: #858b98;
+      font-size: 11px;
+    }
+
+    .beam-footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .beam-footer-links a {
+      color: #aeb4c0;
+      text-decoration: none;
+    }
+
+    .beam-footer-links a:hover {
+      color: #fff;
+    }
+
+    @keyframes footerBeam {
+      0% { background-position: 120% 0; }
+      100% { background-position: -120% 0; }
+    }
+
+    @keyframes wordmarkBeam {
+      0%, 100% { background-position: 100% 50%; }
+      50% { background-position: 0% 50%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .beam-footer:before,
+      .beam-wordmark span {
+        animation: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .beam-footer {
+        padding-top: 58px;
+      }
+
+      .beam-footer-bottom {
+        margin-top: 38px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 24px, 760px);
+      }
+
+      .hero-grid {
+        grid-template-columns: 60px 1fr;
+        gap: 14px;
+      }
+
+      .avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+      }
+
+      .stack-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .exp-top {
+        grid-template-columns: 38px 1fr;
+      }
+
+      .date {
+        grid-column: 2;
+      }
+
+      .logo {
+        width: 38px;
+        height: 38px;
+      }
+
+      .work-section .row {
+        grid-template-columns: 44px 1fr;
+      }
+
+      .thumb {
+        width: 44px;
+        height: 44px;
+      }
+
+      .row-cta {
+        grid-column: 2;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container">
+      <a class="brand" href="#top">Ankit Soni</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#work">Work</a>
+        <a href="#stack">Stack</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Prisma-style video hero -->
+    <section class="prisma-hero" aria-labelledby="hero-title">
+      <!-- Keep your existing Prisma hero markup and video here -->
+    </section>
+
+    <!-- Selected Work -->
+    <section class="section work-section" id="work">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Selected Work</h2>
+            <p>Products, systems and experiences I've worked on.</p>
+          </div>
+        </div>
+
+        <!-- Existing project rows remain here:
+             SourceBae, RecruitBae, Indite, SwagStay, Roojh, etc. -->
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="section" id="stack">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Tech Stack</h2>
+            <p>The tools behind my product design work.</p>
+          </div>
+        </div>
+
+        <div class="stack-grid">
+          <div class="tool">Figma</div>
+          <div class="tool">FigJam</div>
+          <div class="tool">Notion</div>
+          <div class="tool">Photoshop</div>
+          <div class="tool">Illustrator</div>
+          <div class="tool">Framer</div>
+          <div class="tool">HTML / CSS</div>
+          <div class="tool">AI Tools</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Experience</h2>
+            <p>Where I've worked and contributed.</p>
+          </div>
+        </div>
+
+        <div class="exp-list">
+          <article class="exp">
+            <div class="exp-top">
+              <div class="logo">B</div>
+              <div>
+                <h3>Bacancy Technology</h3>
+                <div class="job">UX / UI Designer</div>
+              </div>
+              <div class="date">Feb 2025 — Aug 2026</div>
+            </div>
+
+            <div class="label">Technologies &amp; Tools</div>
+            <div class="chips">
+              <span class="chip">Figma</span>
+              <span class="chip">Design Systems</span>
+              <span class="chip">Prototyping</span>
+              <span class="chip">AI</span>
+            </div>
+
+            <div class="label">What I've done</div>
+            <ul class="done">
+              <li>Designed product and marketing experiences using reusable systems and components.</li>
+              <li>Worked closely with engineering to make designs implementation-ready.</li>
+            </ul>
+          </article>
+
+          <article class="exp">
+            <div class="exp-top">
+              <div class="logo">X</div>
+              <div>
+                <h3>xMoonshot</h3>
+                <div class="job">UX / UI Designer</div>
+              </div>
+              <div class="date">2023 — 2024</div>
+            </div>
+
+            <div class="label">Technologies &amp; Tools</div>
+            <div class="chips">
+              <span class="chip">Figma</span>
+              <span class="chip">UX Research</span>
+              <span class="chip">UI Design</span>
+              <span class="chip">Prototyping</span>
+            </div>
+          </article>
+
+          <article class="exp">
+            <div class="exp-top">
+              <div class="logo">S</div>
+              <div>
+                <h3>SheThink</h3>
+                <div class="job">Product Designer</div>
+              </div>
+              <div class="date">2021 — 2023</div>
+            </div>
+
+            <div class="label">Technologies &amp; Tools</div>
+            <div class="chips">
+              <span class="chip">Figma</span>
+              <span class="chip">Product Design</span>
+              <span class="chip">UX</span>
+              <span class="chip">Design Systems</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-card">
+        <p style="font-size:10px;letter-spacing:.14em;color:#d8ff70;text-transform:uppercase">
+          HAVE A GOOD PROBLEM?
+        </p>
+
+        <h2 style="margin-top:10px">Let’s make something meaningful.</h2>
+
+        <p>
+          Have a product challenge, a design system to shape, or an idea
+          worth exploring? I’d love to hear about it.
+        </p>
+
+        <div class="actions">
+          <a class="btn" href="mailto:ankit1218soni@gmail.com">
+            ankit1218soni@gmail.com ↗
+          </a>
+          <a class="btn" href="https://www.linkedin.com/in/ankitesm/" target="_blank" rel="noreferrer">
+            Connect on LinkedIn ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="beam-footer" aria-label="Portfolio footer">
+    <div class="beam-footer-inner">
+      <div class="beam-wordmark" aria-label="Ankit Soni">
+        <span>ANKIT SONI</span>
+      </div>
+
+      <div class="beam-footer-bottom">
+        <span>© 2026 Ankit Soni · Product Designer</span>
+
+        <nav class="beam-footer-links" aria-label="Footer links">
+          <a href="#work">Selected Work</a>
+          <a href="#experience">Experience</a>
+          <a href="mailto:ankit1218soni@gmail.com">Email ↗</a>
+          <a href="https://www.linkedin.com/in/ankitesm/" target="_blank" rel="noreferrer">
+            LinkedIn ↗
+          </a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const titles = [
+        "Ankit Soni",
+        "Hire Me",
+        "AI Product Designer",
+        "Design Systems",
+        "Portfolio"
+      ];
+
+      let index = 0;
+
+      setInterval(function () {
+        index = (index + 1) % titles.length;
+        document.title = titles[index];
+      }, 1800);
+    })();
+  </script>
+</body>
+</html>

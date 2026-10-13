@@ -73,6 +73,17 @@ a{color:inherit}img{display:block;max-width:100%}h1,h2,h3,p{margin:0}
 @media(max-width:700px){.prisma-topbar{grid-template-columns:1fr auto;padding:18px 18px}.prisma-nav{grid-column:1/-1;grid-row:2;justify-content:space-between;gap:12px;margin-top:20px}.prisma-nav a{font-size:10px}.prisma-contact-link{grid-column:2;grid-row:1}.prisma-hero{min-height:740px;height:92svh;border-radius:0 0 18px 18px}.prisma-hero-top{top:128px;left:18px;right:18px;font-size:8px}.prisma-location{max-width:115px;text-align:right}.prisma-hero-bottom{left:18px;right:18px;bottom:62px;grid-template-columns:1fr;gap:28px}.prisma-overline{font-size:9px}.prisma-title-wrap h1{font-size:clamp(125px,27vw,205px)}.prisma-hero-copy{max-width:420px}.prisma-hero-copy p{font-size:15px;max-width:330px;margin-bottom:18px}.prisma-scroll{left:18px;bottom:18px}.prisma-text-link{margin-left:12px}}
 @media(max-width:380px){.prisma-nav{gap:8px}.prisma-nav a{font-size:9px}.prisma-hero{min-height:700px}.prisma-title-wrap h1{font-size:29vw}.prisma-cta{gap:15px}}
 
+
+/* ===== SCROLL ANIMATIONS ===== */
+.scroll-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:60;background:var(--accent);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+.prisma-title-wrap,.prisma-hero-top,.prisma-video{will-change:transform}
+.feature.reveal{transform:translateY(40px) scale(.95)}
+.feature.reveal.in{transform:none}
+.sec-head h2.reveal-line{display:block;clip-path:inset(0 0 100% 0);transform:translateY(40px);transition:clip-path 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+.sec-head h2.reveal-line.in{clip-path:inset(0 0 -20% 0);transform:none}
+.reveal.slide-left{transform:translateX(-36px)}.reveal.slide-left.in{transform:none}
+.strip-track{will-change:transform}
+
 /* ===== REST OF PAGE ===== */
 .wrap{width:min(100% - clamp(36px,8vw,128px),1180px);margin:auto}
 section.block{padding:clamp(80px,12vw,150px) 0 0}
@@ -136,8 +147,7 @@ section.block{padding:clamp(80px,12vw,150px) 0 0}
 .exp li{padding-left:20px;position:relative}.exp li+li{margin-top:10px}
 .exp li:before{content:"✳";position:absolute;left:0;top:0;color:var(--accent);font-size:11px}
 
-
-/* SEO / AEO: readable service answers */
+/* Services + FAQ */
 .seo-intro{padding:clamp(64px,9vw,110px) 0 0}
 .seo-intro h2{font-size:clamp(36px,6vw,72px);line-height:.95;letter-spacing:-.065em;font-weight:550;max-width:850px}
 .seo-intro .seo-copy{margin-top:24px;max-width:780px;color:var(--muted);font-size:16px;line-height:1.75}
@@ -175,11 +185,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--accent)}
 @media(max-width:860px){.sec-head{grid-template-columns:1fr}.sec-head p{justify-self:start}.feature{grid-template-columns:1fr;min-height:0}.exp{grid-template-columns:1fr;gap:14px}.exp .date{padding:0}}
 @media(max-width:620px){.row{grid-template-columns:56px minmax(0,1fr);gap:14px}.thumb{width:56px;height:56px;border-radius:12px}.row-cta{grid-column:2}.row-cta b{width:32px;height:32px}.row:hover{padding-left:0;padding-right:0}.row:before{display:none}}
 /* Mobile fixes: keep decorative glyphs behind content and prevent overlap */
-.feature-mark,.contact .big-ast{
-  font-family:Inter,ui-sans-serif,Arial,sans-serif;
-  font-variant-emoji:text;
-  pointer-events:none;
-}
+.feature-mark,.contact .big-ast{font-family:Inter,ui-sans-serif,Arial,sans-serif;font-variant-emoji:text;pointer-events:none}
 .feature > div,.contact > div{position:relative;z-index:1}
 @media(max-width:620px){
   .feature{padding:24px 20px;border-radius:20px;gap:26px}
@@ -203,44 +209,18 @@ footer a{text-decoration:none}footer a:hover{color:var(--accent)}
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What does Ankit Soni do as a product designer?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Ankit Soni is a Senior Product Designer focused on product design, UI/UX, UX research, SaaS and AI-powered products, prototyping, and design systems. His portfolio includes product case studies and live digital experiences."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I hire Ankit Soni for freelance UI/UX design?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You can contact Ankit to discuss freelance or contract work involving product design, UI/UX, website and mobile app experiences, SaaS interfaces, prototyping, and design systems. Project scope and availability can be confirmed by email."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What types of projects can a freelance product designer help with?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A freelance product designer can help clarify user journeys, organize information, create wireframes and prototypes, design responsive interfaces, improve usability, and establish reusable design components. The right scope depends on the product, team, and project goals."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does Ankit work on design systems and AI products?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. The portfolio highlights design-system work and AI-powered product experiences, alongside SaaS, hiring, travel, and other digital product projects."
-      }
-    }
+    {"@type": "Question", "name": "What does Ankit Soni do as a product designer?", "acceptedAnswer": {"@type": "Answer", "text": "Ankit Soni is a Senior Product Designer focused on product design, UI/UX, UX research, SaaS and AI-powered products, prototyping, and design systems. His portfolio includes product case studies and live digital experiences."}},
+    {"@type": "Question", "name": "Can I hire Ankit Soni for freelance UI/UX design?", "acceptedAnswer": {"@type": "Answer", "text": "You can contact Ankit to discuss freelance or contract work involving product design, UI/UX, website and mobile app experiences, SaaS interfaces, prototyping, and design systems. Project scope and availability can be confirmed by email."}},
+    {"@type": "Question", "name": "What types of projects can a freelance product designer help with?", "acceptedAnswer": {"@type": "Answer", "text": "A freelance product designer can help clarify user journeys, organize information, create wireframes and prototypes, design responsive interfaces, improve usability, and establish reusable design components. The right scope depends on the product, team, and project goals."}},
+    {"@type": "Question", "name": "Does Ankit work on design systems and AI products?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The portfolio highlights design-system work and AI-powered product experiences, alongside SaaS, hiring, travel, and other digital product projects."}}
   ]
 }
 </script>
 
+<noscript><style>.prisma-video{opacity:1!important}</style></noscript>
 </head>
 <body>
+<div class="scroll-progress" id="sp" aria-hidden="true"></div>
 <header class="prisma-topbar">
   <a class="prisma-brand" href="#top" aria-label="Ankit Soni home">A<span>.</span></a>
   <nav class="prisma-nav" aria-label="Main navigation">
@@ -251,7 +231,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--accent)}
 
 <main id="top">
 <section class="prisma-hero" aria-labelledby="hero-title">
-  <video class="prisma-video" autoplay loop muted playsinline preload="metadata" poster="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=2200&q=85" aria-hidden="true">
+  <video class="prisma-video" autoplay loop muted playsinline preload="metadata" aria-hidden="true">
     <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4" type="video/mp4">
   </video>
   <div class="prisma-noise" aria-hidden="true"></div><div class="prisma-gradient" aria-hidden="true"></div>
@@ -383,12 +363,11 @@ footer a{text-decoration:none}footer a:hover{color:var(--accent)}
     </div>
   </section>
 
-
-  <!-- SERVICES: clear, useful content for visitors and search engines -->
+  <!-- SERVICES -->
   <section class="seo-intro" id="services">
     <div class="eyebrow"><i></i> Product design services</div>
     <h2>Product design that connects user needs with business goals.</h2>
-    <p class="seo-copy">I’m Ankit Soni, a Senior Product Designer based in India, working across product design, UI/UX, UX research, SaaS experiences, AI products, and design systems. I collaborate with teams and clients to turn complex requirements into clear user journeys, useful interfaces, prototypes, and scalable design foundations. If you’re looking for a product designer or UI/UX design freelancer for a website, mobile app, SaaS product, or design system, explore my case studies and get in touch to discuss the project.</p>
+    <p class="seo-copy">I’m Ankit Soni, a Senior Product Designer based in India, working across product design, UI/UX, UX research, SaaS experiences, AI products, and design systems. I turn complex requirements into clear user journeys, useful interfaces, prototypes, and scalable design foundations for websites, mobile apps, SaaS products, and design systems.</p>
     <div class="seo-services">
       <article class="seo-service">
         <h3>Product &amp; UX/UI design</h3>
@@ -409,7 +388,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--accent)}
     </div>
   </section>
 
-  <!-- AEO: concise answers to common project enquiries -->
+  <!-- FAQ -->
   <section class="seo-faq" id="faq">
     <div class="eyebrow"><i></i> Frequently asked questions</div>
     <h2>Working together</h2>
@@ -435,7 +414,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--accent)}
   <section class="contact reveal" id="contact">
     <span class="big-ast" aria-hidden="true">✳</span>
     <div style="position:relative">
-      <div class="eyebrow"><i></i>04 — Contact · Available for new projects</div>
+      <div class="eyebrow"><i></i>04 — Contact</div>
       <h2>Ready to build something <em>useful?</em></h2>
       <p>For product design, UX/UI, design systems and collaboration, reach out by email.</p>
       <div class="actions">
@@ -455,10 +434,54 @@ footer a{text-decoration:none}footer a:hover{color:var(--accent)}
 
 <script>
 (function(){
-  var els=document.querySelectorAll('.reveal');
-  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
-  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
-  els.forEach(function(e){io.observe(e)});
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* Hero video fade-in */
+  var v=document.querySelector('.prisma-video');
+  if(v){var show=function(){v.classList.add('is-ready')};
+    if(v.readyState>=3)show();
+    ['playing','canplay','loadeddata'].forEach(function(e){v.addEventListener(e,show,{once:true})});
+    var p=v.play&&v.play();if(p&&p.catch)p.catch(function(){});}
+
+  /* Mark items for staggered reveal */
+  document.querySelectorAll('.sec-head h2').forEach(function(h){h.classList.add('reveal-line')});
+  var groups=['.rows .row','.stack .pill','.exp','.seo-service','.seo-faq details','.sg'];
+  groups.forEach(function(sel){
+    document.querySelectorAll(sel).forEach(function(el,i){
+      el.classList.add('reveal');el.dataset.stagger='1';
+      el.style.transitionDelay=((i%6)*80)+'ms';
+    });
+  });
+  document.querySelectorAll('.exp').forEach(function(el,i){if(i%2===0)el.classList.add('slide-left')});
+
+  var els=document.querySelectorAll('.reveal,.reveal-line');
+  if(reduce||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')})}
+  else{
+    var io=new IntersectionObserver(function(en){en.forEach(function(x){
+      if(!x.isIntersecting)return;var t=x.target;t.classList.add('in');io.unobserve(t);
+      if(t.dataset.stagger){setTimeout(function(){t.classList.remove('reveal','in','slide-left');t.style.transitionDelay=''},1600)}
+    })},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){io.observe(e)});
+  }
+
+  /* Scroll-linked: progress bar, hero parallax, marquee drift */
+  if(reduce)return;
+  var sp=document.getElementById('sp'),title=document.querySelector('.prisma-title-wrap'),
+      top=document.querySelector('.prisma-hero-top'),copy=document.querySelector('.prisma-hero-bottom'),
+      vid=document.querySelector('.prisma-video'),track=document.querySelector('.strip-track'),ticking=false;
+  function update(){
+    var y=window.scrollY||0,h=document.documentElement.scrollHeight-innerHeight;
+    if(sp)sp.style.transform='scaleX('+(h>0?Math.min(1,y/h):0)+')';
+    if(y<innerHeight*1.2){
+      if(title)title.style.transform='translate3d(0,'+(y*.22)+'px,0)';
+      if(top)top.style.transform='translate3d(0,'+(y*-.12)+'px,0)';
+      if(copy)copy.style.opacity=Math.max(0,1-y/(innerHeight*.7));
+      if(vid)vid.style.transform='scale('+(1+y*.0002)+') translate3d(0,'+(y*.08)+'px,0)';
+    }
+    ticking=false;
+  }
+  addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
+  update();
 })();
 </script>
 </body>

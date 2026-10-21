@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gentle — Connected Investment Portfolio Experience | Ankit Soni</title>
+<meta name="description" content="A fintech mobile UX case study by Ankit Soni exploring investment portfolio review, stock holding details, price alerts, competitor patterns, and a connected user flow.">
+<style>
+:root{color-scheme:dark;--bg:#090909;--card:#111210;--text:#e8e6d7;--muted:rgba(232,230,215,.68);--line:rgba(232,230,215,.16);--accent:#d8ff70}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,sans-serif}a{color:inherit} .wrap{width:min(100% - 40px,1040px);margin:auto}
+nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid var(--line);font-size:13px}nav a{text-decoration:none;color:var(--muted)}.brand{font-weight:800;font-size:22px;color:var(--text);letter-spacing:-.08em}.brand span{color:var(--accent)}
+.hero{padding:100px 0 76px}.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}h1{font-size:clamp(44px,8vw,88px);line-height:.98;letter-spacing:-.075em;max-width:900px;margin:22px 0}h2{font-size:clamp(28px,4vw,44px);letter-spacing:-.055em;line-height:1.08;margin:0 0 20px}h3{font-size:20px;letter-spacing:-.03em;margin:0 0 8px}p{margin:0 0 16px;color:var(--muted)}.lead{font-size:clamp(18px,2vw,22px);max-width:760px}.meta{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0}.pill{border:1px solid var(--line);border-radius:99px;padding:7px 12px;font-size:12px;color:var(--muted)}.button{display:inline-flex;text-decoration:none;background:var(--accent);color:#10110b;padding:12px 17px;border-radius:99px;font-size:13px;font-weight:700;margin:8px 8px 0 0}.button.secondary{background:transparent;border:1px solid var(--line);color:var(--text)}
+section{padding:58px 0;border-top:1px solid var(--line)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}.card p:last-child{margin-bottom:0}.small{font-size:13px}.label{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}.steps{counter-reset:step;display:grid;gap:10px}.step{display:grid;grid-template-columns:42px 1fr;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}.num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#10110b;font-weight:800}.step p{margin:4px 0 0}.note{border-left:2px solid var(--accent);padding:4px 0 4px 18px}.footer{padding:32px 0 50px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media(max-width:650px){.hero{padding:70px 0 54px}.grid{grid-template-columns:1fr}section{padding:42px 0}.wrap{width:min(100% - 32px,1040px)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a class="brand" href="https://oyedesigner.in/">A<span>.</span></a><a href="https://oyedesigner.in/#work">← Back to selected work</a></nav>
+<header class="hero">
+<div class="eyebrow">Fintech · Mobile app · Product design</div>
+<h1>Gentle: A connected investment portfolio experience</h1>
+<p class="lead">Helping people understand their investments, explore individual holdings, and set a price alert through a clear, connected mobile journey.</p>
+<div class="meta"><span class="pill">UX Research</span><span class="pill">Information Architecture</span><span class="pill">User Flows</span><span class="pill">Interaction Design</span><span class="pill">Figma Prototyping</span></div>
+<a class="button" href="https://www.figma.com/proto/74uQdQOkF1NgCag87cALcO/Assessment---Gentle-money?node-id=33-1270&p=f&viewport=143%2C-510%2C0.31&t=aCQYAu7NHfBFJOh6-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=33%3A1270&page-id=1%3A451" target="_blank" rel="noopener noreferrer">Explore the interactive prototype ↗</a>
+<a class="button secondary" href="https://oyedesigner.in/">Portfolio home ↗</a>
+</header>
+
+<section>
+<div class="label">01 — The challenge</div><h2>Make portfolio information easier to understand and act on.</h2>
+<p>Gentle helps people track different investments in one place. The design challenge was to create a connected experience where users can review their portfolio, drill into Stocks and a specific holding, set a price alert, and return later to review or edit that alert without losing context.</p>
+<div class="grid">
+<div class="card"><h3>My focus</h3><p>Build a clear journey from portfolio overview to a specific stock alert, while keeping invested value, current value, and alert conditions easy to distinguish.</p></div>
+<div class="card"><h3>Scope boundary</h3><p>The experience is for monitoring and understanding investments. It does not execute trades or recommend what users should buy or sell.</p></div>
+</div>
+</section>
+
+<section>
+<div class="label">02 — Research &amp; understanding</div><h2>Start with user needs, then study existing patterns.</h2>
+<p>This was a hypothesis-led design exercise, not a completed user-interview study. I used a proto-persona to make assumptions visible, reviewed competitor patterns, and translated those findings into the proposed flow.</p>
+<div class="grid">
+<div class="card"><div class="label">Proto-persona · Assumption</div><h3>Priya, 24 — early-career investor</h3><p>Needs a quick overview of portfolio performance and a simple way to monitor individual holdings. The persona represents a working hypothesis to validate, not a verified research participant.</p><p class="small"><strong>Needs:</strong> understand returns, compare invested and current values, create alerts, and edit saved rules without financial jargon.</p></div>
+<div class="card"><div class="label">Competitor patterns</div><h3>INDmoney &amp; Groww</h3><p>The review focused on portfolio overview and context, stock and mutual-fund information, performance presentation, and how price alerts and notifications are communicated.</p><p class="small"><strong>Design takeaway:</strong> keep the portfolio summary as context, make the selected holding clear, and show the exact alert threshold before saving.</p></div>
+</div>
+<div class="card" style="margin-top:14px"><div class="label">Question to validate with users</div><p class="note">When setting a price alert, would you rather choose a percentage drop or enter an exact target price?</p></div>
+</section>
+
+<section>
+<div class="label">03 — User journey</div><h2>Keep the path forward, backward, and editable.</h2>
+<div class="steps">
+<div class="step"><div class="num">1</div><div><h3>Portfolio overview</h3><p>Orient the user with total invested value, current value, and asset distribution.</p></div></div>
+<div class="step"><div class="num">2</div><div><h3>Stocks category</h3><p>Narrow the portfolio to one asset type and compare individual holdings.</p></div></div>
+<div class="step"><div class="num">3</div><div><h3>TCS holding</h3><p>Show shares owned, average purchase price, and sample current price.</p></div></div>
+<div class="step"><div class="num">4</div><div><h3>Set a price alert</h3><p>Choose the alert type and preview the exact trigger value before confirming.</p></div></div>
+<div class="step"><div class="num">5</div><div><h3>Saved alert</h3><p>Confirm the rule, then provide a route back to TCS to review or edit it.</p></div></div>
+</div>
+<p class="small" style="margin-top:18px">The prototype brief also called for an alternative state, such as an alert that fails to save, alongside the back and edit routes.</p>
+</section>
+
+<section>
+<div class="label">04 — Key design decisions</div><h2>Make financial information and system feedback explicit.</h2>
+<div class="grid">
+<div class="card"><h3>Separate invested and current value</h3><p>Use explicit labels and a consistent hierarchy so users do not confuse the amount invested with the current portfolio value.</p></div>
+<div class="card"><h3>Preview the trigger</h3><p>Show the resulting alert threshold before saving, helping users confirm the rule they intended to create.</p></div>
+<div class="card"><h3>Preserve navigation context</h3><p>Allow users to move back through the portfolio and return to the saved alert without restarting the journey.</p></div>
+<div class="card"><h3>Design for clarity and accessibility</h3><p>Use legible labels, sufficient contrast, usable touch targets, and indicators that do not rely on color alone.</p></div>
+</div>
+</section>
+
+<section>
+<div class="label">05 — Outcome &amp; reflection</div><h2>A connected prototype built around a clear monitoring task.</h2>
+<p>The deliverable brings together problem framing, a proto-persona, competitor-pattern review, a user flow, mobile UI, and an interactive Figma prototype. It is a concept/assessment project, so I am not presenting usability results or business impact metrics that were not measured.</p>
+<div class="card"><h3>What I would validate next</h3><p>Test whether people understand the difference between invested and current value, whether the alert setup language is clear, and whether users can find and edit a saved alert without assistance.</p></div>
+<a class="button" href="https://www.figma.com/proto/74uQdQOkF1NgCag87cALcO/Assessment---Gentle-money?node-id=33-1270&p=f&viewport=143%2C-510%2C0.31&t=aCQYAu7NHfBFJOh6-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=33%3A1270&page-id=1%3A451" target="_blank" rel="noopener noreferrer">View prototype ↗</a>
+</section>
+<footer class="footer"><span>© 2026 Ankit Soni · Product Design</span><a href="https://oyedesigner.in/">oyedesigner.in</a></footer>
+</div>
+</body>
+</html>
